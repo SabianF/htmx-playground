@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Click to Edit</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <script src="https://unpkg.com/htmx.org@2.0.3"></script>
+</head>
+<body>
+  <div hx-target="this" hx-swap="outerHTML">
+    <h1>Click to Edit</h1>
+    <div><label>First name</label>: Joe</div>
+    <div><label>Last name</label>: Blow</div>
+    <div><label>Email</label>: joe@blow.com</div>
+    <button hx-get="/click-to-edit/edit" class="btn primary">Edit</button>
+  </div>
+</body>
+</html>
