@@ -1,26 +1,30 @@
-<!--
-  - HTMX + Go
-    - Part 1 (Templating): https://medium.com/gravel-engineering/this-blogpost-also-posted-in-my-personal-blog-which-you-can-access-here-dd856c61001
-    - Part 2 (TailwindCSS): https://medium.com/gravel-engineering/personal-blog-with-htmx-go-part-2-integrating-tailwindcss-412ebc4dcc97
-    - Part 3 (Server-rendered markdown):https://medium.com/@mwyndham/personal-blog-with-htmx-go-part-3-server-rendered-markdown-75c80cc5f470
-  - HTML custom tags: https://matthewjamestaylor.com/custom-tags
-  - TailwindCSS UI Kit: https://www.hyperui.dev/
--->
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>HTML 5 Boilerplate</title>
-    <link rel="stylesheet" href="style.css" />
-    <script
-      src="https://unpkg.com/htmx.org@2.0.3"
-      integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq"
-      crossorigin="anonymous"
-    ></script>
+    <title>HTMX Playground</title>
+    <script src="https://unpkg.com/htmx.org@2.0.3" integrity="sha384-0895/pl2MU10Hqc6jd4RvrthNlDiE9U1tWmX7WRESftEDRosgxNsQG/Ze9YMRzHq" crossorigin="anonymous"></script>
+    <!--
+      - HTMX + Go + Templ: https://templ.guide/server-side-rendering/htmx/#installation
+      - HTMX + Go
+        - Part 1 (Templating): https://medium.com/gravel-engineering/this-blogpost-also-posted-in-my-personal-blog-which-you-can-access-here-dd856c61001
+        - Part 2 (TailwindCSS): https://medium.com/gravel-engineering/personal-blog-with-htmx-go-part-2-integrating-tailwindcss-412ebc4dcc97
+        - Part 3 (Server-rendered markdown):https://medium.com/@mwyndham/personal-blog-with-htmx-go-part-3-server-rendered-markdown-75c80cc5f470
+      - HTML custom tags: https://matthewjamestaylor.com/custom-tags
+      - TailwindCSS UI Kit: https://www.hyperui.dev/
+    -->
   </head>
   <body>
-
+    <div id="header">
+      <h1 id="title">HTMX Playground</h1>
+    </div>
+    <div id="content">
+      <ul>
+        <li><a href="#" hx-get="/click-to-edit" hx-target="#content" hx-push-url="true">Click to edit</a></li>
+      </ul>
+    </div>
+    <div id="footer"></div>
   </body>
 </html>
