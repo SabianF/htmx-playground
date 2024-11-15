@@ -10,8 +10,8 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 func clickToEditPage(
-	firstname string,
-	lastname string,
+	firstName string,
+	lastName string,
 	email string,
 ) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -39,8 +39,8 @@ func clickToEditPage(
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = clickToEditText(
-			firstname,
-			lastname,
+			firstName,
+			lastName,
 			email,
 		).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
@@ -80,8 +80,8 @@ func title() templ.Component {
 }
 
 func clickToEditText(
-	firstname string,
-	lastname string,
+	firstName string,
+	lastName string,
 	email string,
 ) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -109,7 +109,7 @@ func clickToEditText(
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
-		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(firstname)
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(firstName)
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `click_to_edit.templ`, Line: 28, Col: 46}
 		}
@@ -122,7 +122,7 @@ func clickToEditText(
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(lastname)
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(lastName)
 		if templ_7745c5c3_Err != nil {
 			return templ.Error{Err: templ_7745c5c3_Err, FileName: `click_to_edit.templ`, Line: 29, Col: 44}
 		}
@@ -151,7 +151,11 @@ func clickToEditText(
 	})
 }
 
-func clickToEditForm() templ.Component {
+func clickToEditForm(
+	firstName string,
+	lastName string,
+	email string,
+) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -172,7 +176,46 @@ func clickToEditForm() templ.Component {
 			templ_7745c5c3_Var7 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form hx-put=\"/click-to-edit/save\" hx-target=\"this\" hx-swap=\"outerHTML\"><div><label>First Name</label> <input type=\"text\" name=\"firstName\" value=\"Joe\"></div><div class=\"form-group\"><label>Last Name</label> <input type=\"text\" name=\"lastName\" value=\"Blow\"></div><div class=\"form-group\"><label>Email Address</label> <input type=\"email\" name=\"email\" value=\"joe@blow.com\"></div><button class=\"btn\">Submit</button> <button class=\"btn\" hx-get=\"/click-to-edit/cancel\">Cancel</button></form>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form hx-put=\"/click-to-edit/save\" hx-target=\"this\" hx-swap=\"outerHTML\"><div><label>First Name</label> <input type=\"text\" name=\"firstName\" value=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var8 string
+		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(firstName)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `click_to_edit.templ`, Line: 43, Col: 56}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"></div><div class=\"form-group\"><label>Last Name</label> <input type=\"text\" name=\"lastName\" value=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var9 string
+		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(lastName)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `click_to_edit.templ`, Line: 47, Col: 54}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"></div><div class=\"form-group\"><label>Email Address</label> <input type=\"email\" name=\"email\" value=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var10 string
+		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(email)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `click_to_edit.templ`, Line: 51, Col: 49}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\"></div><button class=\"btn\">Submit</button> <button class=\"btn\" hx-get=\"/click-to-edit/cancel\">Cancel</button></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

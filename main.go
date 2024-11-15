@@ -70,8 +70,8 @@ func getClickMeClicked(w http.ResponseWriter, r *http.Request) {
 }
 
 var clickToEditData = map[string]string{
-	"firstname"	: "Joe",
-	"lastname"	: "Blow",
+	"firstName"	: "Joe",
+	"lastName"	: "Blow",
 	"email"			: "joe@blow.com",
 }
 
@@ -79,8 +79,8 @@ func getClickToEdit(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
 	clickToEditPage(
-		clickToEditData["firstname"],
-		clickToEditData["lastname"],
+		clickToEditData["firstName"],
+		clickToEditData["lastName"],
 		clickToEditData["email"],
 	).Render(r.Context(), w)
 }
@@ -88,26 +88,44 @@ func getClickToEdit(w http.ResponseWriter, r *http.Request) {
 func getEdit(w http.ResponseWriter, r *http.Request	) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	clickToEditForm().Render(r.Context(), w)
+	clickToEditForm(
+		clickToEditData["firstName"],
+		clickToEditData["lastName"],
+		clickToEditData["email"],
+	).Render(r.Context(), w)
 }
 
 func getCancel(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
 	clickToEditText(
-		clickToEditData["firstname"],
-		clickToEditData["lastname"],
+		clickToEditData["firstName"],
+		clickToEditData["lastName"],
 		clickToEditData["email"],
 	).Render(r.Context(), w)
 }
 
 func getSave(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
-	fmt.Printf("Request.body: %#v\n", r.Body)
+
+	firstName := r.PostFormValue("firstName")
+	if firstName != "" && firstName != clickToEditData["firstName"] {
+		clickToEditData["firstName"] = firstName
+	}
+
+	lastName := r.PostFormValue("lastName")
+	if lastName != "" && lastName != clickToEditData["lastName"] {
+		clickToEditData["lastName"] = lastName
+	}
+
+	email := r.PostFormValue("email")
+	if email != "" && email != clickToEditData["email"] {
+		clickToEditData["email"] = email
+	}
 
 	clickToEditText(
-		clickToEditData["firstname"],
-		clickToEditData["lastname"],
+		clickToEditData["firstName"],
+		clickToEditData["lastName"],
 		clickToEditData["email"],
 	).Render(r.Context(), w)
 }

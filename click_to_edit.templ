@@ -2,15 +2,15 @@
 package main
 
 templ clickToEditPage(
-  firstname string,
-  lastname string,
+  firstName string,
+  lastName string,
   email string,
 ) {
   @title()
 
   @clickToEditText(
-    firstname,
-    lastname,
+    firstName,
+    lastName,
     email,
   )
 }
@@ -20,31 +20,35 @@ templ title() {
 }
 
 templ clickToEditText(
-  firstname string,
-  lastname  string,
+  firstName string,
+  lastName  string,
   email     string,
 ) {
   <div hx-target="this" hx-swap="outerHTML">
-    <div><label>First name</label>: {firstname}</div>
-    <div><label>Last name</label>: {lastname}</div>
+    <div><label>First name</label>: {firstName}</div>
+    <div><label>Last name</label>: {lastName}</div>
     <div><label>Email</label>: {email}</div>
     <button hx-get="/click-to-edit/edit" class="btn primary">Edit</button>
   </div>
 }
 
-templ clickToEditForm() {
+templ clickToEditForm(
+  firstName string,
+  lastName  string,
+  email     string,
+) {
 <form hx-put="/click-to-edit/save" hx-target="this" hx-swap="outerHTML">
   <div>
     <label>First Name</label>
-    <input type="text" name="firstName" value="Joe">
+    <input type="text" name="firstName" value={firstName}>
   </div>
   <div class="form-group">
     <label>Last Name</label>
-    <input type="text" name="lastName" value="Blow">
+    <input type="text" name="lastName" value={lastName}>
   </div>
   <div class="form-group">
     <label>Email Address</label>
-    <input type="email" name="email" value="joe@blow.com">
+    <input type="email" name="email" value={email}>
   </div>
   <button class="btn">Submit</button>
   <button class="btn" hx-get="/click-to-edit/cancel">Cancel</button>
