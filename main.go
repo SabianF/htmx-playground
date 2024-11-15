@@ -35,7 +35,7 @@ func main() {
 }
 
 func getRoot(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("GET /\n")
+	fmt.Printf("%s %s\n", r.Method, r.URL)
 
 	component := readFile("index.html")
 
@@ -43,25 +43,25 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 }
 
 func getClickMe(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("GET /click-me\n")
+	fmt.Printf("%s %s\n", r.Method, r.URL)
 
 	io.WriteString(w, readFile("components/click-me/index.html"))
 }
 
 func getClickMeReset(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("GET %s\n", r.URL)
+	fmt.Printf("%s %s\n", r.Method, r.URL)
 
 	io.WriteString(w, readFile("components/click-me/reset.html"))
 }
 
 func getClickMeClicked(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("GET /click-me/clicked\n")
+	fmt.Printf("%s %s\n", r.Method, r.URL)
 
 	io.WriteString(w, readFile("components/click-me/clicked.html"))
 }
 
 func getClickToEdit(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("GET /click-to-edit\n")
+	fmt.Printf("%s %s\n", r.Method, r.URL)
 
 	component := readFile("components/click-to-edit/index.html")
 
@@ -69,19 +69,19 @@ func getClickToEdit(w http.ResponseWriter, r *http.Request) {
 }
 
 func getEdit(w http.ResponseWriter, r *http.Request	) {
-	fmt.Printf("GET /click-to-edit/edit\n")
+	fmt.Printf("%s %s\n", r.Method, r.URL)
 
 	io.WriteString(w, readFile("components/click-to-edit/enabled.html"))
 }
 
 func getCancel(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("GET /click-to-edit/save\n")
+	fmt.Printf("%s %s\n", r.Method, r.URL)
 
 	io.WriteString(w, readFile("components/click-to-edit/index.html"))
 }
 
 func getSave(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("GET /click-to-edit/save\n")
+	fmt.Printf("%s %s\n", r.Method, r.URL)
 	fmt.Printf("Request.body: %#v\n", r.Body)
 
 	io.WriteString(w, readFile("components/click-to-edit/index.html"))
