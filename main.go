@@ -6,6 +6,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"github.com/a-h/templ"
 	"io"
 	"net/http"
 	"os"
@@ -21,6 +22,9 @@ func main() {
 	http.HandleFunc("/click-to-edit/save", getSave)
 	http.HandleFunc("/click-to-edit/cancel", getCancel)
 
+	component := hello("Stephen")
+	http.Handle("/hello", templ.Handler(component))
+
 	const port = ":3333"
 	fmt.Printf("Starting server on port %s ...\n", port)
 	err := http.ListenAndServe(port, nil)
@@ -33,6 +37,8 @@ func main() {
 		os.Exit(1)
 	}
 }
+
+
 
 func getRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
