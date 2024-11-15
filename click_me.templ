@@ -1,13 +1,33 @@
 
 package main
 
-templ clickMe() {
+templ clickMePage() {
+  @clickMeTitle()
+  @clickMeButton()
+}
+
+templ clickMeTitle() {
   <h1>Click me!</h1>
+}
+
+templ clickMeButton() {
+  <div id="click-me">
+    <button
+      hx-get="/click-me/clicked"
+      hx-target="this"
+      hx-swap="outerHTML"
+    >
+      Click me!
+    </button>
+  </div>
+}
+
+templ clickMeClicked() {
+  <p>Wow! You did it!</p>
   <button
-    hx-get="/click-me/clicked"
-    hx-target="this"
-    hx-swap="outerHTML"
+    hx-get="/click-me/reset"
+    hx-target="#click-me"
   >
-    Click me!
+    Reset
   </button>
 }

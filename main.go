@@ -1,6 +1,9 @@
 
 // https://www.digitalocean.com/community/tutorials/how-to-make-an-http-server-in-go
 
+// TODO: Impl hot reloading: https://medium.com/ostinato-rigore/go-htmx-templ-tailwind-complete-project-setup-hot-reloading-2ca1ba6c28be
+// TODO: Impl middleware: https://drstearns.github.io/tutorials/gomiddleware/
+
 package main
 
 import (
@@ -51,19 +54,19 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 func getClickMe(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	clickMe().Render(r.Context(), w)
+	clickMePage().Render(r.Context(), w)
 }
 
 func getClickMeReset(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	io.WriteString(w, readFile("components/click-me/reset.html"))
+	clickMeButton().Render(r.Context(), w)
 }
 
 func getClickMeClicked(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	io.WriteString(w, readFile("components/click-me/clicked.html"))
+	clickMeClicked().Render(r.Context(), w)
 }
 
 func getClickToEdit(w http.ResponseWriter, r *http.Request) {
