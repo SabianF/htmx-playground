@@ -1,4 +1,3 @@
-
 // https://www.digitalocean.com/community/tutorials/how-to-make-an-http-server-in-go
 
 // TODO: Impl hot reloading: https://medium.com/ostinato-rigore/go-htmx-templ-tailwind-complete-project-setup-hot-reloading-2ca1ba6c28be
@@ -9,10 +8,11 @@ package main
 import (
 	"errors"
 	"fmt"
-	"github.com/a-h/templ"
 	"io"
 	"net/http"
 	"os"
+
+	"github.com/a-h/templ"
 )
 
 func main() {
@@ -69,31 +69,47 @@ func getClickMeClicked(w http.ResponseWriter, r *http.Request) {
 	clickMeClicked().Render(r.Context(), w)
 }
 
+var clickToEditData = map[string]string{
+	"firstname"	: "Joe",
+	"lastname"	: "Blow",
+	"email"			: "joe@blow.com",
+}
+
 func getClickToEdit(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	component := readFile("components/click-to-edit/index.html")
-
-	io.WriteString(w, string(component) + "\n")
+	clickToEditPage(
+		clickToEditData["firstname"],
+		clickToEditData["lastname"],
+		clickToEditData["email"],
+	).Render(r.Context(), w)
 }
 
 func getEdit(w http.ResponseWriter, r *http.Request	) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	io.WriteString(w, readFile("components/click-to-edit/enabled.html"))
+	clickToEditForm().Render(r.Context(), w)
 }
 
 func getCancel(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	io.WriteString(w, readFile("components/click-to-edit/index.html"))
+	clickToEditText(
+		clickToEditData["firstname"],
+		clickToEditData["lastname"],
+		clickToEditData["email"],
+	).Render(r.Context(), w)
 }
 
 func getSave(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 	fmt.Printf("Request.body: %#v\n", r.Body)
 
-	io.WriteString(w, readFile("components/click-to-edit/index.html"))
+	clickToEditText(
+		clickToEditData["firstname"],
+		clickToEditData["lastname"],
+		clickToEditData["email"],
+	).Render(r.Context(), w)
 }
 
 func readFile(filepathRelative string) string {
