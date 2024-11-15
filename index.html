@@ -17,14 +17,11 @@
     -->
   </head>
   <body>
-    <div id="header">
-      <h1 id="title">HTMX Playground</h1>
-    </div>
     <div id="content">
-      <ul>
-        <li><a href="#" hx-get="/click-to-edit" hx-target="#content" hx-push-url="true">Click to edit</a></li>
+      <h1 id="title">HTMX Playground</h1>
+      <ul hx-boost="true">
+        <li><a href="/click-me">Click me</a></li>
+        <li><a href="/click-to-edit">Click to edit</a></li>
       </ul>
-    </div>
-    <div id="footer"></div>
   </body>
 </html>

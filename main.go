@@ -13,6 +13,9 @@ import (
 
 func main() {
 	http.HandleFunc("/", getRoot)
+	http.HandleFunc("/click-me", getClickMe)
+	http.HandleFunc("/click-me/clicked", getClickMeClicked)
+	http.HandleFunc("/click-me/reset", getClickMeReset)
 	http.HandleFunc("/click-to-edit", getClickToEdit)
 	http.HandleFunc("/click-to-edit/edit", getEdit)
 	http.HandleFunc("/click-to-edit/save", getSave)
@@ -37,6 +40,24 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 	component := readFile("index.html")
 
 	io.WriteString(w, string(component) + "\n")
+}
+
+func getClickMe(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("GET /click-me\n")
+
+	io.WriteString(w, readFile("components/click-me/index.html"))
+}
+
+func getClickMeReset(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("GET %s\n", r.URL)
+
+	io.WriteString(w, readFile("components/click-me/reset.html"))
+}
+
+func getClickMeClicked(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("GET /click-me/clicked\n")
+
+	io.WriteString(w, readFile("components/click-me/clicked.html"))
 }
 
 func getClickToEdit(w http.ResponseWriter, r *http.Request) {
