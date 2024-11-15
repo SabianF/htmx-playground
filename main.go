@@ -51,7 +51,7 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 func getClickMe(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	io.WriteString(w, readFile("components/click-me/index.html"))
+	clickMe().Render(r.Context(), w)
 }
 
 func getClickMeReset(w http.ResponseWriter, r *http.Request) {
