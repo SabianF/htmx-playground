@@ -1,4 +1,4 @@
-module github.com/a-h/templ-examples/hello-world
+module github.com/SabianF/htmx-playground
 
 go 1.23.3
 
