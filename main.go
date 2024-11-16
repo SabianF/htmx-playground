@@ -11,8 +11,6 @@ import (
 	"io"
 	"net/http"
 	"os"
-
-	"github.com/a-h/templ"
 )
 
 func main() {
@@ -24,9 +22,7 @@ func main() {
 	http.HandleFunc("/click-to-edit/edit", getEdit)
 	http.HandleFunc("/click-to-edit/save", getSave)
 	http.HandleFunc("/click-to-edit/cancel", getCancel)
-
-	component := hello("Stephen")
-	http.Handle("/hello", templ.Handler(component))
+	http.HandleFunc("/hello", getHello)
 
 	const port = ":3333"
 	fmt.Printf("Starting server on port %s ...\n", port)
@@ -49,6 +45,12 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 	component := readFile("index.html")
 
 	io.WriteString(w, string(component) + "\n")
+}
+
+func getHello(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("%s %s\n", r.Method, r.URL)
+
+	hello("Stephen").Render(r.Context(), w)
 }
 
 func getClickMe(w http.ResponseWriter, r *http.Request) {
