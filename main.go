@@ -1,5 +1,6 @@
 // https://www.digitalocean.com/community/tutorials/how-to-make-an-http-server-in-go
 
+// TODO: GoTTH stack: https://www.youtube.com/watch?v=k00jVJeZxrs
 // TODO: Impl hot reloading: https://medium.com/ostinato-rigore/go-htmx-templ-tailwind-complete-project-setup-hot-reloading-2ca1ba6c28be
 // TODO: Impl middleware: https://drstearns.github.io/tutorials/gomiddleware/
 
@@ -9,8 +10,11 @@ import (
 	"errors"
 	"fmt"
 	"io"
-	"net/http"
 	"os"
+
+	"github.com/SabianF/htmx-playground/templates/hello"
+
+	"net/http"
 )
 
 func main() {
@@ -50,7 +54,7 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 func getHello(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	hello("Stephen").Render(r.Context(), w)
+	helloExample.HelloDiv("Stephen").Render(r.Context(), w)
 }
 
 func getClickMe(w http.ResponseWriter, r *http.Request) {
