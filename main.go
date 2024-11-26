@@ -12,16 +12,14 @@ import (
 	"os"
 
 	"github.com/SabianF/htmx-playground/modules/bulk_update"
-	"github.com/SabianF/htmx-playground/modules/common/presentation/pages"
+	common_handlers "github.com/SabianF/htmx-playground/modules/common/data/repositories"
 	"github.com/SabianF/htmx-playground/modules/hello"
-
-
 
 	"net/http"
 )
 
 func main() {
-	http.HandleFunc("/", getRoot)
+	http.HandleFunc("/", common_handlers.GetRoot)
 	http.HandleFunc("/bulk-update", getBulkUpdate)
 	http.HandleFunc("/bulk-update/submit", postBulkUpdate)
 	http.HandleFunc("/click-me", getClickMe)
@@ -44,14 +42,6 @@ func main() {
 		fmt.Printf("Error with server: %s\n", err)
 		os.Exit(1)
 	}
-}
-
-
-
-func getRoot(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	common_pages.HomePage().Render(r.Context(), w)
 }
 
 func getBulkUpdate(w http.ResponseWriter, r *http.Request) {
