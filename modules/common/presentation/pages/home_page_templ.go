@@ -2,7 +2,7 @@
 
 // templ: version: v0.2.793
 
-package common_pages
+package common
 
 //lint:file-ignore SA4006 This context is only used if a nested component is present.
 
@@ -10,7 +10,7 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import (
-	"github.com/SabianF/htmx-playground/modules/common/presentation/components"
+	common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
 )
 
 func HomePage() templ.Component {

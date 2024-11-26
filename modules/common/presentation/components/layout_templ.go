@@ -2,7 +2,7 @@
 
 // templ: version: v0.2.793
 
-package common_components
+package common
 
 //lint:file-ignore SA4006 This context is only used if a nested component is present.
 

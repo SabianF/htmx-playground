@@ -1,10 +1,10 @@
-package common_handlers
+package common
 
 import (
 	"fmt"
 	"net/http"
 
-	"github.com/SabianF/htmx-playground/modules/common/presentation/pages"
+	common_pages "github.com/SabianF/htmx-playground/modules/common/presentation/pages"
 )
 
 func GetRoot(w http.ResponseWriter, r *http.Request) {
