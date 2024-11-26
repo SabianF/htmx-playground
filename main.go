@@ -62,7 +62,7 @@ func postBulkUpdate(w http.ResponseWriter, r *http.Request) {
 func getHello(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	helloExample.HelloDiv("Stephen").Render(r.Context(), w)
+	helloExample.Hello("Stephen").Render(r.Context(), w)
 }
 
 func getClickMe(w http.ResponseWriter, r *http.Request) {
