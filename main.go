@@ -9,7 +9,6 @@ package main
 import (
 	"errors"
 	"fmt"
-	"io"
 	"os"
 
 	"github.com/SabianF/htmx-playground/modules/bulk_update"
@@ -49,9 +48,7 @@ func main() {
 func getRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	component := readFile("index.html")
-
-	io.WriteString(w, string(component) + "\n")
+	homePage().Render(r.Context(), w)
 }
 
 func getBulkUpdate(w http.ResponseWriter, r *http.Request) {
@@ -152,12 +149,4 @@ func getSave(w http.ResponseWriter, r *http.Request) {
 		clickToEditData["lastName"],
 		clickToEditData["email"],
 	).Render(r.Context(), w)
-}
-
-func readFile(filepathRelative string) string {
-	component, err := os.ReadFile(filepathRelative)
-	if err != nil {
-		panic(err)
-	}
-	return string(component)
 }
