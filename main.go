@@ -12,8 +12,8 @@ import (
 	"io"
 	"os"
 
-	"github.com/SabianF/htmx-playground/templates/bulk_update"
-	"github.com/SabianF/htmx-playground/templates/hello"
+	"github.com/SabianF/htmx-playground/modules/bulk_update"
+	"github.com/SabianF/htmx-playground/modules/hello"
 
 	"net/http"
 )
