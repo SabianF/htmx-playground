@@ -1,0 +1,14 @@
+
+package common
+
+templ footer() {
+  @footerWrapper() {
+    <p>Page footer</p>
+  }
+}
+
+templ footerWrapper() {
+  <div id="footer">
+    { children... }
+  </div>
+}

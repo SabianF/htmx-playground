@@ -1,0 +1,14 @@
+
+package common
+
+templ header() {
+  @headerWrapper() {
+    <p>Page header</p>
+  }
+}
+
+templ headerWrapper() {
+  <div id="header">
+    { children... }
+  </div>
+}

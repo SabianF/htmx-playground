@@ -14,7 +14,9 @@ templ Scaffold(title string) {
   @HtmlWrapper(language) {
     @head(title)
     @body() {
+      @header()
       { children... }
+      @footer()
     }
   }
 }
