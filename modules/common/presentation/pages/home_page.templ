@@ -1,0 +1,29 @@
+
+package common_pages
+
+import (
+	"github.com/SabianF/htmx-playground/modules/common/presentation/components"
+)
+
+templ HomePage() {
+  {{ title := "HTMX Playground" }}
+
+  @common_components.Page(title) {
+    <!--
+      - HTMX + Go + Templ: https://templ.guide/server-side-rendering/htmx/#installation
+      - HTMX + Go
+        - Part 1 (Templating): https://medium.com/gravel-engineering/this-blogpost-also-posted-in-my-personal-blog-which-you-can-access-here-dd856c61001
+        - Part 2 (TailwindCSS): https://medium.com/gravel-engineering/personal-blog-with-htmx-go-part-2-integrating-tailwindcss-412ebc4dcc97
+        - Part 3 (Server-rendered markdown):https://medium.com/@mwyndham/personal-blog-with-htmx-go-part-3-server-rendered-markdown-75c80cc5f470
+      - HTML custom tags: https://matthewjamestaylor.com/custom-tags
+      - TailwindCSS UI Kit: https://www.hyperui.dev/
+    -->
+    <h1 id="title">{ title }</h1>
+    <ul hx-boost="true">
+      <li><a href="/hello">Hello</a></li>
+      <li><a href="/click-me">Click me</a></li>
+      <li><a href="/click-to-edit">Click to edit</a></li>
+      <li><a href="/bulk-update">Bulk update</a></li>
+    </ul>
+  }
+}

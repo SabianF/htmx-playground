@@ -12,7 +12,10 @@ import (
 	"os"
 
 	"github.com/SabianF/htmx-playground/modules/bulk_update"
+	"github.com/SabianF/htmx-playground/modules/common/presentation/pages"
 	"github.com/SabianF/htmx-playground/modules/hello"
+
+
 
 	"net/http"
 )
@@ -48,7 +51,7 @@ func main() {
 func getRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	homePage().Render(r.Context(), w)
+	common_pages.HomePage().Render(r.Context(), w)
 }
 
 func getBulkUpdate(w http.ResponseWriter, r *http.Request) {
