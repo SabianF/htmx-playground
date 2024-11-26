@@ -8,6 +8,8 @@
 // - HTML custom tags: https://matthewjamestaylor.com/custom-tags
 // - TailwindCSS UI Kit: https://www.hyperui.dev/
 
+// Go - Serving static files: https://stackoverflow.com/a/43425767
+
 // TODO: GoTTH stack: https://www.youtube.com/watch?v=k00jVJeZxrs
 // TODO: Impl hot reloading: https://medium.com/ostinato-rigore/go-htmx-templ-tailwind-complete-project-setup-hot-reloading-2ca1ba6c28be
 // TODO: Impl middleware: https://drstearns.github.io/tutorials/gomiddleware/
@@ -38,6 +40,8 @@ func main() {
 	http.HandleFunc("/click-to-edit/save", getSave)
 	http.HandleFunc("/click-to-edit/cancel", getCancel)
 	http.HandleFunc("/hello", getHello)
+
+	http.Handle("/modules/common/data/sources/assets/", http.StripPrefix("/modules/", http.FileServer(http.Dir("modules"))))
 
 	const port = ":3333"
 	fmt.Printf("Starting server on port %s ...\n", port)
