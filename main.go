@@ -1,5 +1,13 @@
 // https://www.digitalocean.com/community/tutorials/how-to-make-an-http-server-in-go
 
+// - HTMX + Go + Templ: https://templ.guide/server-side-rendering/htmx/#installation
+// - HTMX + Go
+// 	- Part 1 (Templating): https://medium.com/gravel-engineering/this-blogpost-also-posted-in-my-personal-blog-which-you-can-access-here-dd856c61001
+// 	- Part 2 (TailwindCSS): https://medium.com/gravel-engineering/personal-blog-with-htmx-go-part-2-integrating-tailwindcss-412ebc4dcc97
+// 	- Part 3 (Server-rendered markdown):https://medium.com/@mwyndham/personal-blog-with-htmx-go-part-3-server-rendered-markdown-75c80cc5f470
+// - HTML custom tags: https://matthewjamestaylor.com/custom-tags
+// - TailwindCSS UI Kit: https://www.hyperui.dev/
+
 // TODO: GoTTH stack: https://www.youtube.com/watch?v=k00jVJeZxrs
 // TODO: Impl hot reloading: https://medium.com/ostinato-rigore/go-htmx-templ-tailwind-complete-project-setup-hot-reloading-2ca1ba6c28be
 // TODO: Impl middleware: https://drstearns.github.io/tutorials/gomiddleware/

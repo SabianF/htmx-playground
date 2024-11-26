@@ -47,20 +47,20 @@ func HomePage() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!--\r\n      - HTMX + Go + Templ: https://templ.guide/server-side-rendering/htmx/#installation\r\n      - HTMX + Go\r\n        - Part 1 (Templating): https://medium.com/gravel-engineering/this-blogpost-also-posted-in-my-personal-blog-which-you-can-access-here-dd856c61001\r\n        - Part 2 (TailwindCSS): https://medium.com/gravel-engineering/personal-blog-with-htmx-go-part-2-integrating-tailwindcss-412ebc4dcc97\r\n        - Part 3 (Server-rendered markdown):https://medium.com/@mwyndham/personal-blog-with-htmx-go-part-3-server-rendered-markdown-75c80cc5f470\r\n      - HTML custom tags: https://matthewjamestaylor.com/custom-tags\r\n      - TailwindCSS UI Kit: https://www.hyperui.dev/\r\n    --> <h1 id=\"title\">")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1 id=\"title\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/common/presentation/pages/home_page.templ`, Line: 21, Col: 26}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/common/presentation/pages/home_page.templ`, Line: 12, Col: 26}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><ul hx-boost=\"true\"><li><a href=\"/hello\">Hello</a></li><li><a href=\"/click-me\">Click me</a></li><li><a href=\"/click-to-edit\">Click to edit</a></li><li><a href=\"/bulk-update\">Bulk update</a></li></ul>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><ul hx-boost=\"true\" hx-target=\"#content\"><li><a href=\"/hello\">Hello</a></li><li><a href=\"/click-me\">Click me</a></li><li><a href=\"/click-to-edit\">Click to edit</a></li><li><a href=\"/bulk-update\">Bulk update</a></li></ul>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -14,9 +14,7 @@ templ Scaffold(title string) {
   @HtmlWrapper(language) {
     @head(title)
     @body() {
-      @header()
       { children... }
-      @footer()
     }
   }
 }
@@ -51,9 +49,11 @@ templ styles() {
 }
 
 templ body() {
-  <body>
+  <body id="body">
+    @header()
     <div id="content">
       { children... }
     </div>
+    @footer()
   </body>
 }
