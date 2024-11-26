@@ -12,6 +12,7 @@ import (
 	"io"
 	"os"
 
+	"github.com/SabianF/htmx-playground/templates/bulk_update"
 	"github.com/SabianF/htmx-playground/templates/hello"
 
 	"net/http"
@@ -19,6 +20,8 @@ import (
 
 func main() {
 	http.HandleFunc("/", getRoot)
+	http.HandleFunc("/bulk-update", getBulkUpdate)
+	http.HandleFunc("/bulk-update/submit", postBulkUpdate)
 	http.HandleFunc("/click-me", getClickMe)
 	http.HandleFunc("/click-me/clicked", getClickMeClicked)
 	http.HandleFunc("/click-me/reset", getClickMeReset)
@@ -49,6 +52,21 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 	component := readFile("index.html")
 
 	io.WriteString(w, string(component) + "\n")
+}
+
+func getBulkUpdate(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("%s %s\n", r.Method, r.URL)
+
+	bulk_update.BulkUpdate().Render(r.Context(), w)
+}
+
+func postBulkUpdate(w http.ResponseWriter, r *http.Request) {
+	fmt.Printf("%s %s\n", r.Method, r.URL)
+
+	r.ParseForm()
+	data := map[string][]string(r.PostForm)
+
+	bulk_update.BulkUpdateToast(data).Render(r.Context(), w)
 }
 
 func getHello(w http.ResponseWriter, r *http.Request) {

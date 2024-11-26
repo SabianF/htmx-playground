@@ -15,6 +15,17 @@
       - HTML custom tags: https://matthewjamestaylor.com/custom-tags
       - TailwindCSS UI Kit: https://www.hyperui.dev/
     -->
+    <style>
+      #toast.htmx-settling {
+        opacity: 100;
+      }
+
+      #toast {
+        background: #E1F0DA;
+        opacity: 0;
+        transition: opacity 3s ease-out;
+      }
+    </style>
   </head>
   <body>
     <div id="content">
@@ -23,6 +34,7 @@
         <li><a href="/hello">Hello</a></li>
         <li><a href="/click-me">Click me</a></li>
         <li><a href="/click-to-edit">Click to edit</a></li>
+        <li><a href="/bulk-update">Bulk update</a></li>
       </ul>
   </body>
 </html>

@@ -2,14 +2,14 @@
 
 // templ: version: v0.2.793
 
-package helloExample
+package bulk_update
 
 //lint:file-ignore SA4006 This context is only used if a nested component is present.
 
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func hello(name string) templ.Component {
+func bulkUpdate() templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -30,20 +30,7 @@ func hello(name string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div>Hello there, ")
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(name)
-		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `templates/hello/hello.templ`, Line: 5, Col: 25}
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
-		if templ_7745c5c3_Err != nil {
-			return templ_7745c5c3_Err
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(".</div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form id=\"checked-contacts\" hx-post=\"/bulk-update/submit\" hx-swap=\"outerHTML settle:3s\" hx-target=\"#toast\"><table><thead><tr><th>Name</th><th>Email</th><th>Active</th></tr></thead> <tbody id=\"tbody\"><tr><td>Joe Smith</td><td>joe@smith.org</td><td><input type=\"checkbox\" name=\"active:joe@smith.org\"></td></tr><tr><td>John Statham</td><td>john@statham.org</td><td><input type=\"checkbox\" name=\"active:john@statham.org\"></td></tr><tr><td>Bob Scott</td><td>bob@scott.org</td><td><input type=\"checkbox\" name=\"active:bob@scott.org\"></td></tr></tbody></table><input type=\"submit\" value=\"Bulk Update\" class=\"btn primary\"> <span id=\"toast\"></span></form>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

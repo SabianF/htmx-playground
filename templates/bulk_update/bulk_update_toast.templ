@@ -1,0 +1,29 @@
+
+package bulk_update
+
+templ bulkUpdateToast(updatedUsers map[string][]string) {
+  <span id="toast" aria-live="polite">
+
+    if len(updatedUsers) == 0 {
+      <p>No users updated</p>
+
+    } else {
+      <p>Updated users:</p>
+      <ul>
+        for updatedUser, updatedUserProps := range updatedUsers {
+          <li>
+            <span>{updatedUser}: </span>
+            for index, updatedUserProp := range updatedUserProps {
+              if index == 0 {
+                <span>{updatedUserProp}</span>
+              } else {
+                <span>, {updatedUserProp}</span>
+              }
+            }
+          </li>
+        }
+      </ul>
+    }
+
+  </span>
+}
