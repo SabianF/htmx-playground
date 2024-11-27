@@ -21,14 +21,3 @@ templ headerWrapper() {
     { children... }
   </header>
 }
-
-templ NavBar(title string, items ...templ.Component) {
-  <nav>
-    <ul>{ title }</ul>
-    <ul>
-      for _, item := range items {
-        <li>@item</li>
-      }
-    </ul>
-  </nav>
-}
