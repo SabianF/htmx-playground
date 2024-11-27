@@ -11,6 +11,8 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/SabianF/htmx-playground/modules/bulk_update"
 	"github.com/SabianF/htmx-playground/modules/hello"
@@ -19,6 +21,8 @@ import (
 )
 
 func main() {
+	handleSigTerm()
+
 	http.HandleFunc("/", getRoot)
 	http.HandleFunc("/bulk-update", getBulkUpdate)
 	http.HandleFunc("/bulk-update/submit", postBulkUpdate)
@@ -44,7 +48,15 @@ func main() {
 	}
 }
 
-
+func handleSigTerm() {
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+	go func() {
+		<-c
+		fmt.Println("received SIGTERM, exiting")
+		os.Exit(1)
+	}()
+}
 
 func getRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
