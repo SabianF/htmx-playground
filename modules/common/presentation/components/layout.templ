@@ -43,13 +43,13 @@ templ scripts() {
 }
 
 templ styles() {
-  <link rel="stylesheet" href="/modules/common/data/sources/assets/pico.classless.min.css"></link>
+  <link rel="stylesheet" href="/modules/common/data/sources/assets/pico.min.css"></link>
 }
 
 templ body() {
   <body id="body">
     @header()
-    <main id="content">
+    <main id="content" class="container">
       { children... }
     </main>
     @footer()
