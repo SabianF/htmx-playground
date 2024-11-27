@@ -4,7 +4,7 @@ package common
 templ NavBar(title string, items ...templ.Component) {
   <nav>
     <ul>
-      <li>{ title }</li>
+      <li>@Link("/", title, nil)</li>
     </ul>
     <ul>
       for _, item := range items {
