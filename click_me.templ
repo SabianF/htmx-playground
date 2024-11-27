@@ -1,9 +1,19 @@
 
 package main
 
+import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
+
 templ clickMePage() {
-  @clickMeTitle()
-  @clickMeButton()
+
+  {{
+    title := "Click Me Example"
+    description := "A button that, when clicked, shows a text block, and can also reset"
+  }}
+
+  @common_components.Page(title, description) {
+    @clickMeTitle()
+    @clickMeButton()
+  }
 }
 
 templ clickMeTitle() {

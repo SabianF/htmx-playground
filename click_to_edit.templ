@@ -1,21 +1,30 @@
 
 package main
 
+import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
+
 templ clickToEditPage(
   firstName string,
   lastName string,
   email string,
 ) {
-  @title()
 
-  @clickToEditText(
-    firstName,
-    lastName,
-    email,
-  )
+  {{
+    title := "Click to Edit Example"
+    description := "A form that updates string values, based on user-filled fields"
+  }}
+
+  @common_components.Page(title, description) {
+    @heading()
+    @clickToEditText(
+      firstName,
+      lastName,
+      email,
+    )
+  }
 }
 
-templ title() {
+templ heading() {
   <h1>Click to edit</h1>
 }
 
