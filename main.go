@@ -23,9 +23,11 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/SabianF/htmx-playground/modules/bulk_update"
+	bulk_update "github.com/SabianF/htmx-playground/modules/bulk_update"
+	click_me "github.com/SabianF/htmx-playground/modules/click_me"
+	click_to_edit "github.com/SabianF/htmx-playground/modules/click_to_edit"
 	common_handlers "github.com/SabianF/htmx-playground/modules/common/data/repositories"
-	"github.com/SabianF/htmx-playground/modules/hello"
+	helloExample "github.com/SabianF/htmx-playground/modules/hello"
 
 	"net/http"
 )
@@ -94,19 +96,19 @@ func getHello(w http.ResponseWriter, r *http.Request) {
 func getClickMe(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	clickMePage().Render(r.Context(), w)
+	click_me.ClickMePage().Render(r.Context(), w)
 }
 
 func getClickMeReset(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	clickMeButton().Render(r.Context(), w)
+	click_me.ClickMeButton().Render(r.Context(), w)
 }
 
 func getClickMeClicked(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	clickMeClicked().Render(r.Context(), w)
+	click_me.ClickMeClicked().Render(r.Context(), w)
 }
 
 var clickToEditData = map[string]string{
@@ -118,7 +120,7 @@ var clickToEditData = map[string]string{
 func getClickToEdit(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	clickToEditPage(
+	click_to_edit.ClickToEditPage(
 		clickToEditData["firstName"],
 		clickToEditData["lastName"],
 		clickToEditData["email"],
@@ -128,7 +130,7 @@ func getClickToEdit(w http.ResponseWriter, r *http.Request) {
 func getEdit(w http.ResponseWriter, r *http.Request	) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	clickToEditForm(
+	click_to_edit.ClickToEditForm(
 		clickToEditData["firstName"],
 		clickToEditData["lastName"],
 		clickToEditData["email"],
@@ -138,7 +140,7 @@ func getEdit(w http.ResponseWriter, r *http.Request	) {
 func getCancel(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	clickToEditText(
+	click_to_edit.ClickToEditText(
 		clickToEditData["firstName"],
 		clickToEditData["lastName"],
 		clickToEditData["email"],
@@ -163,7 +165,7 @@ func getSave(w http.ResponseWriter, r *http.Request) {
 		clickToEditData["email"] = email
 	}
 
-	clickToEditText(
+	click_to_edit.ClickToEditText(
 		clickToEditData["firstName"],
 		clickToEditData["lastName"],
 		clickToEditData["email"],

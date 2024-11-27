@@ -1,9 +1,9 @@
 
-package main
+package click_to_edit
 
 import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
 
-templ clickToEditPage(
+templ ClickToEditPage(
   firstName string,
   lastName string,
   email string,
@@ -16,7 +16,7 @@ templ clickToEditPage(
 
   @common_components.Page(title, description) {
     @heading()
-    @clickToEditText(
+    @ClickToEditText(
       firstName,
       lastName,
       email,
@@ -28,7 +28,7 @@ templ heading() {
   <h1>Click to edit</h1>
 }
 
-templ clickToEditText(
+templ ClickToEditText(
   firstName string,
   lastName  string,
   email     string,
@@ -41,7 +41,7 @@ templ clickToEditText(
   </div>
 }
 
-templ clickToEditForm(
+templ ClickToEditForm(
   firstName string,
   lastName  string,
   email     string,

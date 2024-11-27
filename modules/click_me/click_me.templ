@@ -1,9 +1,9 @@
 
-package main
+package click_me
 
 import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
 
-templ clickMePage() {
+templ ClickMePage() {
 
   {{
     title := "Click Me Example"
@@ -12,7 +12,7 @@ templ clickMePage() {
 
   @common_components.Page(title, description) {
     @clickMeTitle()
-    @clickMeButton()
+    @ClickMeButton()
   }
 }
 
@@ -20,7 +20,7 @@ templ clickMeTitle() {
   <h1>Click me!</h1>
 }
 
-templ clickMeButton() {
+templ ClickMeButton() {
   <div id="click-me">
     <button
       hx-get="/click-me/clicked"
@@ -32,7 +32,7 @@ templ clickMeButton() {
   </div>
 }
 
-templ clickMeClicked() {
+templ ClickMeClicked() {
   <p>Wow! You did it!</p>
   <button
     hx-get="/click-me/reset"
