@@ -8,7 +8,10 @@ templ Page(title string, description string) {
 }
 
 templ Scaffold(title string, description string) {
-  {{ language := "en" }}
+
+  {{
+    language := "en"
+  }}
 
   <!DOCTYPE html>
   @HtmlWrapper(language) {
