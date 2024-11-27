@@ -31,7 +31,7 @@ import (
 )
 
 func main() {
-	handleSigTerm()
+	handleGracefulExit()
 
 	http.HandleFunc("/", common_handlers.GetRoot)
 	http.HandleFunc("/bulk-update", getBulkUpdate)
@@ -60,12 +60,12 @@ func main() {
 	}
 }
 
-func handleSigTerm() {
+func handleGracefulExit() {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 	go func() {
 		<-c
-		fmt.Println("received SIGTERM, exiting")
+		fmt.Printf("Received SIGTERM. Exiting...\n")
 		os.Exit(1)
 	}()
 }
