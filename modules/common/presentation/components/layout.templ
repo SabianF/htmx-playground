@@ -1,18 +1,18 @@
 
 package common
 
-templ Page(title string) {
-  @Scaffold(title) {
+templ Page(title string, description string) {
+  @Scaffold(title, description) {
     { children... }
   }
 }
 
-templ Scaffold(title string) {
+templ Scaffold(title string, description string) {
   {{ language := "en" }}
 
   <!DOCTYPE html>
   @HtmlWrapper(language) {
-    @head(title)
+    @head(title, description)
     @body() {
       { children... }
     }
@@ -25,12 +25,13 @@ templ HtmlWrapper(language string) {
   </html>
 }
 
-templ head(title string) {
+templ head(title string, description string) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>{ title }</title>
+    <meta name="description" content={ description } />
     @scripts()
     @styles()
   </head>
@@ -38,6 +39,7 @@ templ head(title string) {
 
 templ scripts() {
   <script src="/modules/common/data/sources/assets/htmx-2.0.3.min.js"></script>
+  <script src="/modules/common/data/sources/assets/htmx-head-support-2.0.1.min.js"></script>
 }
 
 templ styles() {
