@@ -1,0 +1,13 @@
+
+package common
+
+templ Dropdown(text string, items ...templ.Component) {
+  <details class="dropdown">
+    <summary>{ text }</summary>
+    <ul>
+      for _, child := range items {
+        <li>@child</li>
+      }
+    </ul>
+  </details>
+}

@@ -2,8 +2,17 @@
 package common
 
 templ header() {
+
   @headerWrapper() {
-    <p>Page header</p>
+    @NavBar("HTMX Playground",
+      Link("/", "Home", nil),
+      Dropdown("Implementations",
+        Link("/hello", "Hello", nil),
+        Link("/click-me", "Click Me", nil),
+        Link("/click-to-edit", "Click to Edit", nil),
+        Link("/bulk-update", "Bulk Update", nil),
+      ),
+    )
   }
 }
 
@@ -11,4 +20,15 @@ templ headerWrapper() {
   <header id="header" hx-preserve="true">
     { children... }
   </header>
+}
+
+templ NavBar(title string, items ...templ.Component) {
+  <nav>
+    <ul>{ title }</ul>
+    <ul>
+      for _, item := range items {
+        <li>@item</li>
+      }
+    </ul>
+  </nav>
 }

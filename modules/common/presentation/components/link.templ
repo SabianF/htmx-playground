@@ -1,0 +1,6 @@
+
+package common
+
+templ Link(href templ.SafeURL, text string, attrs templ.Attributes) {
+  <a href={ href } { attrs... }>{ text }</a>
+}
