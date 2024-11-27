@@ -20,6 +20,8 @@ import (
 	"errors"
 	"fmt"
 	"os"
+	"os/signal"
+	"syscall"
 
 	"github.com/SabianF/htmx-playground/modules/bulk_update"
 	common_handlers "github.com/SabianF/htmx-playground/modules/common/data/repositories"
@@ -29,6 +31,8 @@ import (
 )
 
 func main() {
+	handleSigTerm()
+
 	http.HandleFunc("/", common_handlers.GetRoot)
 	http.HandleFunc("/bulk-update", getBulkUpdate)
 	http.HandleFunc("/bulk-update/submit", postBulkUpdate)
@@ -54,6 +58,16 @@ func main() {
 		fmt.Printf("Error with server: %s\n", err)
 		os.Exit(1)
 	}
+}
+
+func handleSigTerm() {
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+	go func() {
+		<-c
+		fmt.Println("received SIGTERM, exiting")
+		os.Exit(1)
+	}()
 }
 
 func getBulkUpdate(w http.ResponseWriter, r *http.Request) {
