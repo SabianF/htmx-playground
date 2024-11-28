@@ -1,13 +1,41 @@
-body {
-  background-color: #EEEEEE;
+
+#toast.htmx-settling {
+  opacity: 100;
 }
 
-h1 {
-  font-size: 64pt;
-  color: #888888;
+#toast {
+  animation: fadeOut 3s linear forwards;
+  -moz-animation: fadeOut 3s linear forwards; /* Firefox */
+  -webkit-animation: fadeOut 3s linear forwards; /* Safari and Chrome */
+  -o-animation: fadeOut 3s linear forwards; /* Opera */
 }
 
-p {
-  font-size: 18pt;
-  color: #444444
+@keyframes fadeOut {
+  0% {
+    opacity: 100%;
+  }
+
+  80% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 0%;
+    display: none;
+  }
+}
+
+@-webkit-keyframes fadeOut {
+  0% {
+    opacity: 100%;
+  }
+
+  80% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 0%;
+    visibility: hidden;
+  }
 }
