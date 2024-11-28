@@ -8,13 +8,8 @@ templ Page(title string, description string) {
 }
 
 templ Scaffold(title string, description string) {
-
-  {{
-    language := "en"
-  }}
-
   <!DOCTYPE html>
-  @HtmlWrapper(language) {
+  @HtmlWrapper() {
     @head(title, description)
     @body() {
       { children... }
@@ -22,8 +17,8 @@ templ Scaffold(title string, description string) {
   }
 }
 
-templ HtmlWrapper(language string) {
-  <html lang={ language }>
+templ HtmlWrapper() {
+  <html lang="en">
     { children... }
   </html>
 }
