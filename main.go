@@ -47,6 +47,7 @@ func main() {
 	http.HandleFunc("/click-to-edit/save", getSave)
 	http.HandleFunc("/click-to-edit/cancel", getCancel)
 	http.HandleFunc("/click-to-load", click_to_load_use_cases.ServePageWithInitialData)
+	http.HandleFunc("/click-to-load/", click_to_load_use_cases.LoadMoreUsers)
 	http.HandleFunc("/hello", getHello)
 
 	http.Handle("/modules/common/data/sources/assets/", http.StripPrefix("/modules/", http.FileServer(http.Dir("modules"))))

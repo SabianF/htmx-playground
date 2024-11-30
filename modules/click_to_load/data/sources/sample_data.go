@@ -15,7 +15,7 @@ func GetSampleUserData(page int, pagination_amount int) []byte {
 
 	sample_users := []map[string]interface{}{}
 
-	for i := page - 1; i < page*pagination_amount; i++ {
+	for i := (page - 1) * pagination_amount; i < page*pagination_amount; i++ {
 
 		new_user := map[string]interface{}{
 			"name":  "Agent Smith",
