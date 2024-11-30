@@ -26,6 +26,7 @@ import (
 	bulk_update "github.com/SabianF/htmx-playground/modules/bulk_update"
 	click_me "github.com/SabianF/htmx-playground/modules/click_me"
 	click_to_edit "github.com/SabianF/htmx-playground/modules/click_to_edit"
+	click_to_load_use_cases "github.com/SabianF/htmx-playground/modules/click_to_load/domain/use_cases"
 	common_handlers "github.com/SabianF/htmx-playground/modules/common/data/repositories"
 	helloExample "github.com/SabianF/htmx-playground/modules/hello"
 
@@ -45,6 +46,7 @@ func main() {
 	http.HandleFunc("/click-to-edit/edit", getEdit)
 	http.HandleFunc("/click-to-edit/save", getSave)
 	http.HandleFunc("/click-to-edit/cancel", getCancel)
+	http.HandleFunc("/click-to-load", click_to_load_use_cases.ServePageWithInitialData)
 	http.HandleFunc("/hello", getHello)
 
 	http.Handle("/modules/common/data/sources/assets/", http.StripPrefix("/modules/", http.FileServer(http.Dir("modules"))))

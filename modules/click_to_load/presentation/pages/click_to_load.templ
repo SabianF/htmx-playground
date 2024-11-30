@@ -1,0 +1,36 @@
+
+package click_to_load
+
+import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
+
+templ ClickToLoad(
+  headings []string,
+  initialRows [][]string,
+) {
+  {{
+    title := "Click to Load Example"
+    description := "A table of database items with a button to load the next page of data."
+  }}
+
+  @common_components.Page(title, description) {
+    <h1>{ title }</h1>
+    <table>
+      <thead>
+        <tr>
+          for _, headingField := range headings {
+            <th>{ headingField }</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        for _, row := range initialRows {
+          <tr>
+            for _, rowField := range row {
+              <td>{ rowField }</td>
+            }
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+}
