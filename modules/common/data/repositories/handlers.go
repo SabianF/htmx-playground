@@ -4,11 +4,13 @@ import (
 	"fmt"
 	"net/http"
 
-	common_pages "github.com/SabianF/htmx-playground/modules/common/presentation/pages"
+	common_use_cases "github.com/SabianF/htmx-playground/modules/common/domain/use_cases"
 )
 
 func GetRoot(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	common_pages.HomePage().Render(r.Context(), w)
+	homePage := common_use_cases.GetHomePage()
+
+	homePage.Render(r.Context(), w)
 }
