@@ -35,7 +35,22 @@ import (
 
 func main() {
 	handleGracefulExit()
+	exposeEndpoints()
+	exposeResources()
+	startServer()
+}
 
+func handleGracefulExit() {
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+	go func() {
+		<-c
+		fmt.Printf("Received SIGTERM. Exiting...\n")
+		os.Exit(1)
+	}()
+}
+
+func exposeEndpoints() {
 	http.HandleFunc("/", common_handlers.GetRoot)
 	http.HandleFunc("/bulk-update", getBulkUpdate)
 	http.HandleFunc("/bulk-update/submit", postBulkUpdate)
@@ -49,9 +64,13 @@ func main() {
 	http.HandleFunc("/click-to-load", click_to_load_use_cases.ServePageWithInitialData)
 	http.HandleFunc("/click-to-load/", click_to_load_use_cases.LoadMoreUsers)
 	http.HandleFunc("/hello", getHello)
+}
 
+func exposeResources() {
 	http.Handle("/modules/common/data/sources/assets/", http.StripPrefix("/modules/", http.FileServer(http.Dir("modules"))))
+}
 
+func startServer() {
 	const port = ":3333"
 	fmt.Printf("Starting server on port %s ...\n", port)
 	err := http.ListenAndServe(port, nil)
@@ -63,16 +82,6 @@ func main() {
 		fmt.Printf("Error with server: %s\n", err)
 		os.Exit(1)
 	}
-}
-
-func handleGracefulExit() {
-	c := make(chan os.Signal, 1)
-	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
-	go func() {
-		<-c
-		fmt.Printf("Received SIGTERM. Exiting...\n")
-		os.Exit(1)
-	}()
 }
 
 func getBulkUpdate(w http.ResponseWriter, r *http.Request) {
