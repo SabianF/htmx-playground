@@ -7,6 +7,7 @@ import (
 
 	click_to_load "github.com/SabianF/htmx-playground/modules/click_to_load/domain/repositories"
 	click_to_load_pages "github.com/SabianF/htmx-playground/modules/click_to_load/presentation/pages"
+	click_to_load_components "github.com/SabianF/htmx-playground/modules/click_to_load/presentation/components"
 )
 
 func ServePageWithInitialData(w http.ResponseWriter, r *http.Request) {
@@ -41,7 +42,7 @@ func LoadMoreUsers(w http.ResponseWriter, r *http.Request) {
 
 	// Render components
 	nextPageNumString := strconv.Itoa(pageNum + 1)
-	component := click_to_load_pages.Rows(userDataStrings, nextPageNumString)
+	component := click_to_load_components.Rows(userDataStrings, nextPageNumString)
 
 	// Send response
 	component.Render(r.Context(), w)
