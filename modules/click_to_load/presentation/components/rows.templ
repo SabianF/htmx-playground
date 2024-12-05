@@ -1,6 +1,8 @@
 
 package click_to_load
 
+const LAST_ROW_ID string = "next-rows"
+
 templ Rows(rows [][]string, nextPageNum string) {
 	for _, row := range rows {
 		<tr>
@@ -13,11 +15,11 @@ templ Rows(rows [][]string, nextPageNum string) {
 }
 
 templ Button(pageToLoad string) {
-	<tr id="next-rows">
+	<tr id={ LAST_ROW_ID }>
 		<td colspan="3">
 			<button
 				hx-get={ "/click-to-load/?page=" + pageToLoad }
-				hx-target="#next-rows"
+				hx-target={ "#" + LAST_ROW_ID }
 				hx-swap="outerHTML"
         class="container-fluid"
 			>
