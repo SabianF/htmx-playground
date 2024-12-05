@@ -41,7 +41,7 @@ func LoadMoreUsers(w http.ResponseWriter, r *http.Request) {
 
 	// Render components
 	nextPageNumString := strconv.Itoa(pageNum + 1)
-	component := click_to_load_pages.ClickToLoadRows(userDataStrings, nextPageNumString)
+	component := click_to_load_pages.Rows(userDataStrings, nextPageNumString)
 
 	// Send response
 	component.Render(r.Context(), w)

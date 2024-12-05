@@ -29,12 +29,12 @@ templ ClickToLoadTable(
 			</tr>
 		</thead>
 		<tbody>
-			@ClickToLoadRows(initialRows, nextPageNum)
+			@Rows(initialRows, nextPageNum)
 		</tbody>
 	</table>
 }
 
-templ ClickToLoadRows(rows [][]string, nextPageNum string) {
+templ Rows(rows [][]string, nextPageNum string) {
 	for _, row := range rows {
 		<tr>
 			for _, rowField := range row {
