@@ -28,7 +28,7 @@ import (
 	click_to_edit "github.com/SabianF/htmx-playground/modules/click_to_edit"
 	click_to_load_use_cases "github.com/SabianF/htmx-playground/modules/click_to_load/domain/use_cases"
 	common_handlers "github.com/SabianF/htmx-playground/modules/common/data/repositories"
-	helloExample "github.com/SabianF/htmx-playground/modules/hello"
+	hello_pages "github.com/SabianF/htmx-playground/modules/hello/presentation/pages"
 
 	"net/http"
 )
@@ -102,7 +102,7 @@ func postBulkUpdate(w http.ResponseWriter, r *http.Request) {
 func getHello(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	helloExample.Hello("Stephen").Render(r.Context(), w)
+	hello_pages.Hello("Stephen").Render(r.Context(), w)
 }
 
 func getClickMe(w http.ResponseWriter, r *http.Request) {

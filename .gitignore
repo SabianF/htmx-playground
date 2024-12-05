@@ -21,7 +21,8 @@
 go.work
 go.work.sum
 
-# custom files
+# custom
+.templates/
 .pico*
 
 # env file
