@@ -5,11 +5,13 @@ import common_components "github.com/SabianF/htmx-playground/modules/common/pres
 import click_to_load_components "github.com/SabianF/htmx-playground/modules/click_to_load/presentation/components"
 
 templ ClickToLoad(headings []string, initialRows [][]string) {
+
 	{{
-	title := "Click to Load Example"
-	description := "A table of database items with a button to load the next page of data."
-	nextPageNum := "2"
+    title := "Click to Load Example"
+    description := "A table of database items with a button to load the next page of data."
+    nextPageNum := "2"
 	}}
+
 	@common_components.Page(title, description) {
 		<h1>{ title }</h1>
 		@ClickToLoadTable(headings, initialRows, nextPageNum)
