@@ -24,7 +24,8 @@ import (
 	"syscall"
 
 	bulk_update "github.com/SabianF/htmx-playground/modules/bulk_update"
-	click_me "github.com/SabianF/htmx-playground/modules/click_me"
+	click_me_pages "github.com/SabianF/htmx-playground/modules/click_me/presentation/pages"
+	click_me_components "github.com/SabianF/htmx-playground/modules/click_me/presentation/components"
 	click_to_edit "github.com/SabianF/htmx-playground/modules/click_to_edit"
 	click_to_load_use_cases "github.com/SabianF/htmx-playground/modules/click_to_load/domain/use_cases"
 	common_handlers "github.com/SabianF/htmx-playground/modules/common/data/repositories"
@@ -108,19 +109,19 @@ func getHello(w http.ResponseWriter, r *http.Request) {
 func getClickMe(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	click_me.ClickMePage().Render(r.Context(), w)
+	click_me_pages.ClickMePage().Render(r.Context(), w)
 }
 
 func getClickMeReset(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	click_me.ClickMeButton().Render(r.Context(), w)
+	click_me_components.ClickMeButton().Render(r.Context(), w)
 }
 
 func getClickMeClicked(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	click_me.ClickMeClicked().Render(r.Context(), w)
+	click_me_components.ClickMeClicked().Render(r.Context(), w)
 }
 
 var clickToEditData = map[string]string{

@@ -1,0 +1,18 @@
+
+package click_me
+
+import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
+import click_me_components "github.com/SabianF/htmx-playground/modules/click_me/presentation/components"
+
+templ ClickMePage() {
+
+  {{
+    title := "Click Me Example"
+    description := "A button that, when clicked, shows a text block, and can also reset"
+  }}
+
+  @common_components.Page(title, description) {
+    @click_me_components.ClickMeTitle()
+    @click_me_components.ClickMeButton()
+  }
+}
