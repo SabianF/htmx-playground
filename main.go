@@ -26,7 +26,7 @@ import (
 	bulk_update "github.com/SabianF/htmx-playground/modules/bulk_update"
 	click_me_pages "github.com/SabianF/htmx-playground/modules/click_me/presentation/pages"
 	click_me_components "github.com/SabianF/htmx-playground/modules/click_me/presentation/components"
-	click_to_edit "github.com/SabianF/htmx-playground/modules/click_to_edit"
+	click_to_edit_pages "github.com/SabianF/htmx-playground/modules/click_to_edit/presentation/pages"
 	click_to_load_use_cases "github.com/SabianF/htmx-playground/modules/click_to_load/domain/use_cases"
 	common_handlers "github.com/SabianF/htmx-playground/modules/common/data/repositories"
 	hello_pages "github.com/SabianF/htmx-playground/modules/hello/presentation/pages"
@@ -133,7 +133,7 @@ var clickToEditData = map[string]string{
 func getClickToEdit(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	click_to_edit.ClickToEditPage(
+	click_to_edit_pages.ClickToEditPage(
 		clickToEditData["firstName"],
 		clickToEditData["lastName"],
 		clickToEditData["email"],
@@ -143,7 +143,7 @@ func getClickToEdit(w http.ResponseWriter, r *http.Request) {
 func getEdit(w http.ResponseWriter, r *http.Request	) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	click_to_edit.ClickToEditForm(
+	click_to_edit_pages.ClickToEditForm(
 		clickToEditData["firstName"],
 		clickToEditData["lastName"],
 		clickToEditData["email"],
@@ -153,7 +153,7 @@ func getEdit(w http.ResponseWriter, r *http.Request	) {
 func getCancel(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
-	click_to_edit.ClickToEditText(
+	click_to_edit_pages.ClickToEditText(
 		clickToEditData["firstName"],
 		clickToEditData["lastName"],
 		clickToEditData["email"],
@@ -178,7 +178,7 @@ func getSave(w http.ResponseWriter, r *http.Request) {
 		clickToEditData["email"] = email
 	}
 
-	click_to_edit.ClickToEditText(
+	click_to_edit_pages.ClickToEditText(
 		clickToEditData["firstName"],
 		clickToEditData["lastName"],
 		clickToEditData["email"],
