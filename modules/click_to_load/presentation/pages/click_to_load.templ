@@ -4,60 +4,58 @@ package click_to_load
 import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
 
 templ ClickToLoad(headings []string, initialRows [][]string) {
-
-  {{
-    title := "Click to Load Example"
-    description := "A table of database items with a button to load the next page of data."
-    nextPageNum := "2"
-  }}
-
-  @common_components.Page(title, description) {
-    <h1>{ title }</h1>
-    @ClickToLoadTable(headings, initialRows, nextPageNum)
-  }
+	{{
+	title := "Click to Load Example"
+	description := "A table of database items with a button to load the next page of data."
+	nextPageNum := "2"
+	}}
+	@common_components.Page(title, description) {
+		<h1>{ title }</h1>
+		@ClickToLoadTable(headings, initialRows, nextPageNum)
+	}
 }
 
 templ ClickToLoadTable(
-  headings []string,
-  initialRows [][]string,
-  nextPageNum string,
+	headings []string,
+	initialRows [][]string,
+	nextPageNum string,
 ) {
-  <table>
-    <thead>
-      <tr>
-        for _, headingField := range headings {
-          <th>{ headingField }</th>
-        }
-      </tr>
-    </thead>
-    <tbody>
-      @ClickToLoadRows(initialRows, nextPageNum)
-    </tbody>
-  </table>
+	<table>
+		<thead>
+			<tr>
+				for _, headingField := range headings {
+					<th>{ headingField }</th>
+				}
+			</tr>
+		</thead>
+		<tbody>
+			@ClickToLoadRows(initialRows, nextPageNum)
+		</tbody>
+	</table>
 }
 
 templ ClickToLoadRows(rows [][]string, nextPageNum string) {
-  for _, row := range rows {
-    <tr>
-      for _, rowField := range row {
-        <td>{ rowField }</td>
-      }
-    </tr>
-  }
-  @ClickToLoadButton(nextPageNum)
+	for _, row := range rows {
+		<tr>
+			for _, rowField := range row {
+				<td>{ rowField }</td>
+			}
+		</tr>
+	}
+	@Button(nextPageNum)
 }
 
-templ ClickToLoadButton(pageToLoad string) {
-  <tr id="next-rows">
-    <td>
-      <button
-        hx-get={ "/click-to-load/?page=" + pageToLoad }
-        hx-target="#next-rows"
-        hx-swap="outerHTML"
-      >
-        Load more...
-        <span class="htmx-indicator" aria-busy="true"></span>
-      </button>
-    </td>
-  </tr>
+templ Button(pageToLoad string) {
+	<tr id="next-rows">
+		<td>
+			<button
+				hx-get={ "/click-to-load/?page=" + pageToLoad }
+				hx-target="#next-rows"
+				hx-swap="outerHTML"
+			>
+				Load more...
+				<span class="htmx-indicator" aria-busy="true"></span>
+			</button>
+		</td>
+	</tr>
 }

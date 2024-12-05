@@ -55,7 +55,7 @@ func ClickToLoad(headings []string, initialRows [][]string) templ.Component {
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/pages/click_to_load.templ`, Line: 15, Col: 15}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/pages/click_to_load.templ`, Line: 13, Col: 13}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -116,7 +116,7 @@ func ClickToLoadTable(
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(headingField)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/pages/click_to_load.templ`, Line: 29, Col: 28}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/pages/click_to_load.templ`, Line: 27, Col: 23}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
@@ -177,7 +177,7 @@ func ClickToLoadRows(rows [][]string, nextPageNum string) templ.Component {
 				var templ_7745c5c3_Var7 string
 				templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(rowField)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/pages/click_to_load.templ`, Line: 43, Col: 22}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/pages/click_to_load.templ`, Line: 41, Col: 18}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 				if templ_7745c5c3_Err != nil {
@@ -193,7 +193,7 @@ func ClickToLoadRows(rows [][]string, nextPageNum string) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = ClickToLoadButton(nextPageNum).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = Button(nextPageNum).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -201,7 +201,7 @@ func ClickToLoadRows(rows [][]string, nextPageNum string) templ.Component {
 	})
 }
 
-func ClickToLoadButton(pageToLoad string) templ.Component {
+func Button(pageToLoad string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -229,7 +229,7 @@ func ClickToLoadButton(pageToLoad string) templ.Component {
 		var templ_7745c5c3_Var9 string
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs("/click-to-load/?page=" + pageToLoad)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/pages/click_to_load.templ`, Line: 54, Col: 53}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/pages/click_to_load.templ`, Line: 52, Col: 49}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 		if templ_7745c5c3_Err != nil {
