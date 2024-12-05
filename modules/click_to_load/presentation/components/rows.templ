@@ -14,14 +14,15 @@ templ Rows(rows [][]string, nextPageNum string) {
 
 templ Button(pageToLoad string) {
 	<tr id="next-rows">
-		<td>
+		<td colspan="3">
 			<button
 				hx-get={ "/click-to-load/?page=" + pageToLoad }
 				hx-target="#next-rows"
 				hx-swap="outerHTML"
+        class="container-fluid"
 			>
-				Load more...
-				<span class="htmx-indicator" aria-busy="true"></span>
+				Load more
+        <span class="htmx-indicator" aria-busy="true" aria-label="Loading..."></span>
 			</button>
 		</td>
 	</tr>

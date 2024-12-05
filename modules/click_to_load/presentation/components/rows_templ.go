@@ -88,7 +88,7 @@ func Button(pageToLoad string) templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr id=\"next-rows\"><td><button hx-get=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<tr id=\"next-rows\"><td colspan=\"3\"><button hx-get=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -101,7 +101,7 @@ func Button(pageToLoad string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-target=\"#next-rows\" hx-swap=\"outerHTML\">Load more... <span class=\"htmx-indicator\" aria-busy=\"true\"></span></button></td></tr>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-target=\"#next-rows\" hx-swap=\"outerHTML\" class=\"container-fluid\">Load more <span class=\"htmx-indicator\" aria-busy=\"true\" aria-label=\"Loading...\"></span></button></td></tr>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
