@@ -1,0 +1,30 @@
+
+package common
+
+import common_entities "github.com/SabianF/htmx-playground/modules/common/domain/entities"
+
+var PAGE_LIST = []common_entities.Page{
+  common_entities.Page{"/hello", "Hello Example"},
+  common_entities.Page{"/click-me", "Click me"},
+  common_entities.Page{"/click-to-edit", "Click to Edit"},
+  common_entities.Page{"/bulk-update", "Bulk Update"},
+  common_entities.Page{"/click-to-load", "Click to Load"},
+}
+
+templ Menu(pages []common_entities.Page) {
+  for _, page := range pages {
+    @Link(page.Route, page.Title, nil)
+  }
+}
+
+templ MainMenuLinks() {
+  @Menu(PAGE_LIST)
+}
+
+templ MainMenuList() {
+  <ul>
+    for _, page := range PAGE_LIST {
+      <li>@Link(page.Route, page.Title, nil)</li>
+    }
+  </ul>
+}

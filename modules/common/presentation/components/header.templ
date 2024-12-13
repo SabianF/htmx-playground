@@ -6,10 +6,7 @@ templ header() {
     @NavBar("HTMX Playground",
       Link("/", "Home", nil),
       Dropdown("Implementations",
-        Link("/hello", "Hello", nil),
-        Link("/click-me", "Click Me", nil),
-        Link("/click-to-edit", "Click to Edit", nil),
-        Link("/bulk-update", "Bulk Update", nil),
+        MainMenuLinks(),
       ),
     )
   }
