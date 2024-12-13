@@ -10,14 +10,15 @@ import (
 	click_to_load_components "github.com/SabianF/htmx-playground/modules/click_to_load/presentation/components"
 )
 
+const DEFAULT_PAGINATION = 10
+
 func ServePageWithInitialData(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
 	const INITIAL_PAGE = 1
-	const INITIAL_PAGINATION = 10
 
 	userDataHeadings := click_to_load.GetUserProps()
-	userDataRows := click_to_load.GetUsers(INITIAL_PAGE, INITIAL_PAGINATION)
+	userDataRows := click_to_load.GetUsers(INITIAL_PAGE, DEFAULT_PAGINATION)
 
 	component := click_to_load_pages.ClickToLoad(userDataHeadings, userDataRows)
 
@@ -26,8 +27,6 @@ func ServePageWithInitialData(w http.ResponseWriter, r *http.Request) {
 
 func LoadMoreUsers(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	const DEFAULT_PAGINATION = 20
 
 	// Parse query
 	pageNumQuery := r.URL.Query().Get("page")
