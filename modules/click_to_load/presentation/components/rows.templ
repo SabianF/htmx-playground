@@ -6,8 +6,8 @@ const LAST_ROW_ID string = "next-rows"
 templ Rows(rows [][]string, nextPageNum string) {
 	for _, row := range rows {
 		<tr>
-			for _, rowField := range row {
-				<td>{ rowField }</td>
+			for _, column := range row {
+				<td>{ column }</td>
 			}
 		</tr>
 	}
