@@ -46,11 +46,13 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 	usersStringified := stringifyUsers(users)
 	nextPageNumString := strconv.Itoa(pageNum + 1)
 
-	use_cases.LoadMoreUsers(
-		ROUTE_GET_USERS,
-		usersStringified,
-		nextPageNumString,
-	).Render(r.Context(), w)
+	args := use_cases.LoadMoreUsersArgs{
+		Route_get_users: ROUTE_GET_USERS,
+		Next_page: nextPageNumString,
+		UserDataStrings: usersStringified,
+	}
+
+	use_cases.LoadMoreUsers(args).Render(r.Context(), w)
 }
 
 func GetUserProps() []string {
