@@ -22,7 +22,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	bulk_update_use_cases "github.com/SabianF/htmx-playground/modules/bulk_update/domain/use_cases"
+	bulk_update_data_repos "github.com/SabianF/htmx-playground/modules/bulk_update/data/repositories"
 	click_me_components "github.com/SabianF/htmx-playground/modules/click_me/presentation/components"
 	click_me_pages "github.com/SabianF/htmx-playground/modules/click_me/presentation/pages"
 	click_to_edit_components "github.com/SabianF/htmx-playground/modules/click_to_edit/presentation/components"
@@ -56,8 +56,8 @@ func exposeEndpoints() {
 	// TODO: Create routes in each module, then import all here to expose
 
 	http.HandleFunc("/", common_handlers.GetRoot)
-	http.HandleFunc(bulk_update_use_cases.ROUTE_PAGE, bulk_update_use_cases.GetPage)
-	http.HandleFunc(bulk_update_use_cases.ROUTE_UPDATE, bulk_update_use_cases.Update)
+	http.HandleFunc(bulk_update_data_repos.ROUTE_PAGE, bulk_update_data_repos.GetPage)
+	http.HandleFunc(bulk_update_data_repos.ROUTE_UPDATE, bulk_update_data_repos.GetUpdate)
 	http.HandleFunc("/click-me", getClickMe)
 	http.HandleFunc("/click-me/clicked", getClickMeClicked)
 	http.HandleFunc("/click-me/reset", getClickMeReset)
