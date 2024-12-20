@@ -35,9 +35,12 @@ const ROUTE_ROOT string = "/"
 
 func main() {
 	handleGracefulExit()
-	exposeEndpoints()
-	exposeResources()
-	startServer()
+
+	mux := http.NewServeMux()
+
+	exposeEndpoints(mux)
+	exposeResources(mux)
+	startServer(mux)
 }
 
 func handleGracefulExit() {
@@ -50,30 +53,30 @@ func handleGracefulExit() {
 	}()
 }
 
-func exposeEndpoints() {
-	http.HandleFunc(ROUTE_ROOT, common_handlers.GetRoot)
-	http.HandleFunc(bulk_update_data_repos.ROUTE_PAGE, bulk_update_data_repos.GetPage)
-	http.HandleFunc(bulk_update_data_repos.ROUTE_UPDATE, bulk_update_data_repos.GetUpdate)
-	http.HandleFunc(click_me_data_repos.ROUTE_PAGE, click_me_data_repos.GetPage)
-	http.HandleFunc(click_me_data_repos.ROUTE_CLICKED, click_me_data_repos.GetClicked)
-	http.HandleFunc(click_me_data_repos.ROUTE_RESET, click_me_data_repos.GetReset)
-	http.HandleFunc(click_to_edit_data_repos.ROUTE_PAGE, click_to_edit_data_repos.GetPage)
-	http.HandleFunc(click_to_edit_data_repos.ROUTE_EDIT, click_to_edit_data_repos.GetEdit)
-	http.HandleFunc(click_to_edit_data_repos.ROUTE_SAVE, click_to_edit_data_repos.GetSave)
-	http.HandleFunc(click_to_edit_data_repos.ROUTE_CANCEL, click_to_edit_data_repos.GetCancel)
-	http.HandleFunc(click_to_load_data_repos.ROUTE_PAGE, click_to_load_data_repos.GetPage)
-	http.HandleFunc(click_to_load_data_repos.ROUTE_GET_USERS, click_to_load_data_repos.GetUsers)
-	http.HandleFunc(hello_example_data_repos.ROUTE_PAGE, hello_example_data_repos.GetPage)
+func exposeEndpoints(mux *http.ServeMux) {
+	mux.HandleFunc(ROUTE_ROOT, common_handlers.GetRoot)
+	mux.HandleFunc(bulk_update_data_repos.ROUTE_PAGE, bulk_update_data_repos.GetPage)
+	mux.HandleFunc(bulk_update_data_repos.ROUTE_UPDATE, bulk_update_data_repos.GetUpdate)
+	mux.HandleFunc(click_me_data_repos.ROUTE_PAGE, click_me_data_repos.GetPage)
+	mux.HandleFunc(click_me_data_repos.ROUTE_CLICKED, click_me_data_repos.GetClicked)
+	mux.HandleFunc(click_me_data_repos.ROUTE_RESET, click_me_data_repos.GetReset)
+	mux.HandleFunc(click_to_edit_data_repos.ROUTE_PAGE, click_to_edit_data_repos.GetPage)
+	mux.HandleFunc(click_to_edit_data_repos.ROUTE_EDIT, click_to_edit_data_repos.GetEdit)
+	mux.HandleFunc(click_to_edit_data_repos.ROUTE_SAVE, click_to_edit_data_repos.GetSave)
+	mux.HandleFunc(click_to_edit_data_repos.ROUTE_CANCEL, click_to_edit_data_repos.GetCancel)
+	mux.HandleFunc(click_to_load_data_repos.ROUTE_PAGE, click_to_load_data_repos.GetPage)
+	mux.HandleFunc(click_to_load_data_repos.ROUTE_GET_USERS, click_to_load_data_repos.GetUsers)
+	mux.HandleFunc(hello_example_data_repos.ROUTE_PAGE, hello_example_data_repos.GetPage)
 }
 
-func exposeResources() {
-	http.Handle("/modules/common/data/sources/assets/", http.StripPrefix("/modules/", http.FileServer(http.Dir("modules"))))
+func exposeResources(mux *http.ServeMux) {
+	mux.Handle("/modules/common/data/sources/assets/", http.StripPrefix("/modules/", http.FileServer(http.Dir("modules"))))
 }
 
-func startServer() {
+func startServer(mux *http.ServeMux) {
 	const port = ":3333"
 	fmt.Printf("Starting server on port %s ...\n", port)
-	err := http.ListenAndServe(port, nil)
+	err := http.ListenAndServe(port, mux)
 
 	if errors.Is(err, http.ErrServerClosed) {
 		fmt.Printf("Server closed\n")
