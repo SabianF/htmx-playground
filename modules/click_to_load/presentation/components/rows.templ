@@ -3,7 +3,11 @@ package click_to_load
 
 const LAST_ROW_ID string = "next-rows"
 
-templ Rows(rows [][]string, nextPageNum string) {
+templ Rows(
+	route_get_users string,
+	next_page string,
+	rows [][]string,
+) {
 	for _, row := range rows {
 		<tr>
 			for _, column := range row {
@@ -11,14 +15,14 @@ templ Rows(rows [][]string, nextPageNum string) {
 			}
 		</tr>
 	}
-	@Button(nextPageNum)
+	@Button(route_get_users, next_page)
 }
 
-templ Button(pageToLoad string) {
+templ Button(route_get_users string, pageToLoad string) {
 	<tr id={ LAST_ROW_ID }>
 		<td colspan="3">
 			<button
-				hx-get={ "/click-to-load/?page=" + pageToLoad }
+				hx-get={ route_get_users + "?page=" + pageToLoad }
 				hx-target={ "#" + LAST_ROW_ID }
 				hx-swap="outerHTML"
         class="container-fluid"

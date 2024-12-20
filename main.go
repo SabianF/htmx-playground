@@ -25,7 +25,7 @@ import (
 	bulk_update_data_repos "github.com/SabianF/htmx-playground/modules/bulk_update/data/repositories"
 	click_me_data_repos "github.com/SabianF/htmx-playground/modules/click_me/data/repositories"
 	click_to_edit_data_repos "github.com/SabianF/htmx-playground/modules/click_to_edit/data/repositories"
-	click_to_load_use_cases "github.com/SabianF/htmx-playground/modules/click_to_load/domain/use_cases"
+	click_to_load_data_repos "github.com/SabianF/htmx-playground/modules/click_to_load/data/repositories"
 	common_handlers "github.com/SabianF/htmx-playground/modules/common/data/repositories"
 	hello_pages "github.com/SabianF/htmx-playground/modules/hello/presentation/pages"
 
@@ -65,8 +65,8 @@ func exposeEndpoints() {
 	http.HandleFunc(click_to_edit_data_repos.ROUTE_EDIT, click_to_edit_data_repos.GetEdit)
 	http.HandleFunc(click_to_edit_data_repos.ROUTE_SAVE, click_to_edit_data_repos.GetSave)
 	http.HandleFunc(click_to_edit_data_repos.ROUTE_CANCEL, click_to_edit_data_repos.GetCancel)
-	http.HandleFunc("/click-to-load", click_to_load_use_cases.ServePageWithInitialData)
-	http.HandleFunc("/click-to-load/", click_to_load_use_cases.LoadMoreUsers)
+	http.HandleFunc(click_to_load_data_repos.ROUTE_PAGE, click_to_load_data_repos.GetPage)
+	http.HandleFunc(click_to_load_data_repos.ROUTE_GET_USERS, click_to_load_data_repos.GetUsers)
 	http.HandleFunc("/hello", getHello)
 }
 

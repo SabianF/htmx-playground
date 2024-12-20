@@ -4,24 +4,34 @@ package click_to_load
 import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
 import click_to_load_components "github.com/SabianF/htmx-playground/modules/click_to_load/presentation/components"
 
-templ ClickToLoad(headings []string, initialRows [][]string) {
+templ ClickToLoad(
+	route_get_users string,
+	next_page string,
+	headings []string,
+	initialRows [][]string,
+) {
 
 	{{
     title := "Click to Load Example"
     description := "A table of database items with a button to load the next page of data."
-    nextPageNum := "2"
 	}}
 
 	@common_components.Page(title, description) {
 		<h1>{ title }</h1>
-		@ClickToLoadTable(headings, initialRows, nextPageNum)
+		@ClickToLoadTable(
+			route_get_users,
+			next_page,
+			headings,
+			initialRows,
+		)
 	}
 }
 
 templ ClickToLoadTable(
+	route_get_users string,
+	next_page string,
 	headings []string,
 	initialRows [][]string,
-	nextPageNum string,
 ) {
 	<table>
 		<thead>
@@ -32,7 +42,11 @@ templ ClickToLoadTable(
 			</tr>
 		</thead>
 		<tbody>
-			@click_to_load_components.Rows(initialRows, nextPageNum)
+			@click_to_load_components.Rows(
+				route_get_users,
+				next_page,
+				initialRows,
+			)
 		</tbody>
 	</table>
 }

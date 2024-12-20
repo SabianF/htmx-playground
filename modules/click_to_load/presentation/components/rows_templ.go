@@ -11,7 +11,11 @@ import templruntime "github.com/a-h/templ/runtime"
 
 const LAST_ROW_ID string = "next-rows"
 
-func Rows(rows [][]string, nextPageNum string) templ.Component {
+func Rows(
+	route_get_users string,
+	next_page string,
+	rows [][]string,
+) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -45,7 +49,7 @@ func Rows(rows [][]string, nextPageNum string) templ.Component {
 				var templ_7745c5c3_Var2 string
 				templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(column)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/components/rows.templ`, Line: 10, Col: 16}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/components/rows.templ`, Line: 14, Col: 16}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 				if templ_7745c5c3_Err != nil {
@@ -61,7 +65,7 @@ func Rows(rows [][]string, nextPageNum string) templ.Component {
 				return templ_7745c5c3_Err
 			}
 		}
-		templ_7745c5c3_Err = Button(nextPageNum).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = Button(route_get_users, next_page).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -69,7 +73,7 @@ func Rows(rows [][]string, nextPageNum string) templ.Component {
 	})
 }
 
-func Button(pageToLoad string) templ.Component {
+func Button(route_get_users string, pageToLoad string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -97,7 +101,7 @@ func Button(pageToLoad string) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(LAST_ROW_ID)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/components/rows.templ`, Line: 18, Col: 21}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/components/rows.templ`, Line: 22, Col: 21}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -108,9 +112,9 @@ func Button(pageToLoad string) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs("/click-to-load/?page=" + pageToLoad)
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(route_get_users + "?page=" + pageToLoad)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/components/rows.templ`, Line: 21, Col: 49}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/components/rows.templ`, Line: 25, Col: 52}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -123,7 +127,7 @@ func Button(pageToLoad string) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs("#" + LAST_ROW_ID)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/components/rows.templ`, Line: 22, Col: 33}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/components/rows.templ`, Line: 26, Col: 33}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {

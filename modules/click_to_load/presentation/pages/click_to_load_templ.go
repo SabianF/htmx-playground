@@ -12,7 +12,12 @@ import templruntime "github.com/a-h/templ/runtime"
 import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
 import click_to_load_components "github.com/SabianF/htmx-playground/modules/click_to_load/presentation/components"
 
-func ClickToLoad(headings []string, initialRows [][]string) templ.Component {
+func ClickToLoad(
+	route_get_users string,
+	next_page string,
+	headings []string,
+	initialRows [][]string,
+) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -36,7 +41,6 @@ func ClickToLoad(headings []string, initialRows [][]string) templ.Component {
 
 		title := "Click to Load Example"
 		description := "A table of database items with a button to load the next page of data."
-		nextPageNum := "2"
 		templ_7745c5c3_Var2 := templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 			templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 			templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templruntime.GetBuffer(templ_7745c5c3_W)
@@ -56,7 +60,7 @@ func ClickToLoad(headings []string, initialRows [][]string) templ.Component {
 			var templ_7745c5c3_Var3 string
 			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/pages/click_to_load.templ`, Line: 16, Col: 13}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/pages/click_to_load.templ`, Line: 20, Col: 13}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 			if templ_7745c5c3_Err != nil {
@@ -66,7 +70,12 @@ func ClickToLoad(headings []string, initialRows [][]string) templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ClickToLoadTable(headings, initialRows, nextPageNum).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ClickToLoadTable(
+				route_get_users,
+				next_page,
+				headings,
+				initialRows,
+			).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -81,9 +90,10 @@ func ClickToLoad(headings []string, initialRows [][]string) templ.Component {
 }
 
 func ClickToLoadTable(
+	route_get_users string,
+	next_page string,
 	headings []string,
 	initialRows [][]string,
-	nextPageNum string,
 ) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -117,7 +127,7 @@ func ClickToLoadTable(
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(headingField)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/pages/click_to_load.templ`, Line: 30, Col: 23}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_load/presentation/pages/click_to_load.templ`, Line: 40, Col: 23}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
@@ -132,7 +142,11 @@ func ClickToLoadTable(
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = click_to_load_components.Rows(initialRows, nextPageNum).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = click_to_load_components.Rows(
+			route_get_users,
+			next_page,
+			initialRows,
+		).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
