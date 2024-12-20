@@ -2,7 +2,7 @@
 package common
 
 templ NavBar(title string, items ...templ.Component) {
-  <nav hx-boost="true">
+  <nav>
     <ul>
       <li>@Link("/", title, nil)</li>
     </ul>

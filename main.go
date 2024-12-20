@@ -54,7 +54,7 @@ func handleGracefulExit() {
 }
 
 func exposeEndpoints(mux *http.ServeMux) {
-	mux.HandleFunc(ROUTE_ROOT, common_handlers.GetRoot)
+	mux.HandleFunc(ROUTE_ROOT, common_handlers.GetPage)
 	mux.HandleFunc(bulk_update_data_repos.ROUTE_PAGE, bulk_update_data_repos.GetPage)
 	mux.HandleFunc(bulk_update_data_repos.ROUTE_UPDATE, bulk_update_data_repos.GetUpdate)
 	mux.HandleFunc(click_me_data_repos.ROUTE_PAGE, click_me_data_repos.GetPage)

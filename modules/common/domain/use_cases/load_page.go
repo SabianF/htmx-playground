@@ -6,7 +6,5 @@ import (
 )
 
 func GetHomePage() templ.Component {
-
-	component := common_pages.HomePage()
-	return component
+	return common_pages.HomePage()
 }
