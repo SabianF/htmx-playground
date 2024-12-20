@@ -22,13 +22,13 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
-	"time"
 
 	bulk_update_data_repos "github.com/SabianF/htmx-playground/modules/bulk_update/data/repositories"
 	click_me_data_repos "github.com/SabianF/htmx-playground/modules/click_me/data/repositories"
 	click_to_edit_data_repos "github.com/SabianF/htmx-playground/modules/click_to_edit/data/repositories"
 	click_to_load_data_repos "github.com/SabianF/htmx-playground/modules/click_to_load/data/repositories"
-	common_handlers "github.com/SabianF/htmx-playground/modules/common/data/repositories"
+	data_repos "github.com/SabianF/htmx-playground/modules/common/data/repositories"
+	sources "github.com/SabianF/htmx-playground/modules/common/data/sources"
 	hello_example_data_repos "github.com/SabianF/htmx-playground/modules/hello/data/repositories"
 )
 
@@ -42,23 +42,9 @@ func main() {
 	exposeEndpoints(mux)
 	exposeResources(mux)
 
-	mux_wrapped := NewLogger(mux)
+	mux_wrapped := data_repos.NewLogger(mux)
 
 	startServer(mux_wrapped)
-}
-
-type Logger struct {
-	handler http.Handler
-}
-
-func (l *Logger) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	start_time := time.Now()
-	l.handler.ServeHTTP(w, r)
-	log.Printf("%s %s %v", r.Method, r.URL.Path, time.Since(start_time))
-}
-
-func NewLogger(handler http.Handler) *Logger {
-	return &Logger{handler: handler}
 }
 
 func handleGracefulExit() {
@@ -72,7 +58,7 @@ func handleGracefulExit() {
 }
 
 func exposeEndpoints(mux *http.ServeMux) {
-	mux.HandleFunc(ROUTE_ROOT, common_handlers.GetPage)
+	mux.HandleFunc(ROUTE_ROOT, data_repos.GetPage)
 	mux.HandleFunc(bulk_update_data_repos.ROUTE_PAGE, bulk_update_data_repos.GetPage)
 	mux.HandleFunc(bulk_update_data_repos.ROUTE_UPDATE, bulk_update_data_repos.GetUpdate)
 	mux.HandleFunc(click_me_data_repos.ROUTE_PAGE, click_me_data_repos.GetPage)
@@ -91,7 +77,7 @@ func exposeResources(mux *http.ServeMux) {
 	mux.Handle("/modules/common/data/sources/assets/", http.StripPrefix("/modules/", http.FileServer(http.Dir("modules"))))
 }
 
-func startServer(mux *Logger) {
+func startServer(mux *sources.Logger) {
 	const port = ":3333"
 	log.Printf("Starting server on port %s ...\n", port)
 	err := http.ListenAndServe(port, mux)
