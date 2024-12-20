@@ -20,12 +20,15 @@ var clickToEditData = map[string]string{
 }
 
 func GetPage(w http.ResponseWriter, r *http.Request) {
-	use_cases.LoadPage(
-		ROUTE_EDIT,
-		clickToEditData["firstName"],
-		clickToEditData["lastName"],
-		clickToEditData["email"],
-	).Render(r.Context(), w)
+
+	args := use_cases.LoadPageArgs{
+		Route_edit: ROUTE_EDIT,
+		FirstName:  clickToEditData["firstName"],
+		LastName:   clickToEditData["lastName"],
+		Email:      clickToEditData["email"],
+	}
+
+	use_cases.LoadPage(args).Render(r.Context(), w)
 }
 
 func GetEdit(w http.ResponseWriter, r *http.Request) {

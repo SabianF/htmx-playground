@@ -5,16 +5,18 @@ import (
 	"github.com/a-h/templ"
 )
 
-func LoadPage(
-	route_edit string,
-	firstName string,
-	lastName string,
-	email string,
-) templ.Component {
+type LoadPageArgs struct {
+	Route_edit string
+	FirstName string
+	LastName string
+	Email string
+}
+
+func LoadPage(args LoadPageArgs) templ.Component {
 	return click_to_edit_pages.ClickToEditPage(
-		route_edit,
-		firstName,
-		lastName,
-		email,
+		args.Route_edit,
+		args.FirstName,
+		args.LastName,
+		args.Email,
 	)
 }
