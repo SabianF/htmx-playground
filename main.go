@@ -33,6 +33,8 @@ import (
 	"net/http"
 )
 
+const ROUTE_ROOT string = "/"
+
 func main() {
 	handleGracefulExit()
 	exposeEndpoints()
@@ -54,7 +56,7 @@ func exposeEndpoints() {
 
 	// TODO: Create routes in each module, then import all here to expose
 
-	http.HandleFunc("/", common_handlers.GetRoot)
+	http.HandleFunc(ROUTE_ROOT, common_handlers.GetRoot)
 	http.HandleFunc(bulk_update_data_repos.ROUTE_PAGE, bulk_update_data_repos.GetPage)
 	http.HandleFunc(bulk_update_data_repos.ROUTE_UPDATE, bulk_update_data_repos.GetUpdate)
 	http.HandleFunc(click_me_data_repos.ROUTE_PAGE, click_me_data_repos.GetPage)
