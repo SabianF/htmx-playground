@@ -4,7 +4,7 @@ package click_me
 import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
 import click_me_components "github.com/SabianF/htmx-playground/modules/click_me/presentation/components"
 
-templ ClickMePage() {
+templ ClickMePage(route_clicked string) {
 
   {{
     title := "Click Me Example"
@@ -13,6 +13,6 @@ templ ClickMePage() {
 
   @common_components.Page(title, description) {
     @click_me_components.ClickMeTitle()
-    @click_me_components.ClickMeButton()
+    @click_me_components.ClickMeButton(route_clicked)
   }
 }

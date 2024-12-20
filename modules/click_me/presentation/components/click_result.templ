@@ -1,10 +1,10 @@
 
 package click_me
 
-templ ClickMeClicked() {
+templ ClickMeClicked(route_reset string) {
   <p>Wow! You did it!</p>
   <button
-    hx-get="/click-me/reset"
+    hx-get={ route_reset }
     hx-target="#click-me"
   >
     Reset

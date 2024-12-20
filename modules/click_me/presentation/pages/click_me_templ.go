@@ -12,7 +12,7 @@ import templruntime "github.com/a-h/templ/runtime"
 import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
 import click_me_components "github.com/SabianF/htmx-playground/modules/click_me/presentation/components"
 
-func ClickMePage() templ.Component {
+func ClickMePage(route_clicked string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -56,7 +56,7 @@ func ClickMePage() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = click_me_components.ClickMeButton().Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = click_me_components.ClickMeButton(route_clicked).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

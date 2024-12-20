@@ -23,8 +23,7 @@ import (
 	"syscall"
 
 	bulk_update_data_repos "github.com/SabianF/htmx-playground/modules/bulk_update/data/repositories"
-	click_me_components "github.com/SabianF/htmx-playground/modules/click_me/presentation/components"
-	click_me_pages "github.com/SabianF/htmx-playground/modules/click_me/presentation/pages"
+	click_me_data_repos "github.com/SabianF/htmx-playground/modules/click_me/data/repositories"
 	click_to_edit_components "github.com/SabianF/htmx-playground/modules/click_to_edit/presentation/components"
 	click_to_edit_pages "github.com/SabianF/htmx-playground/modules/click_to_edit/presentation/pages"
 	click_to_load_use_cases "github.com/SabianF/htmx-playground/modules/click_to_load/domain/use_cases"
@@ -58,9 +57,9 @@ func exposeEndpoints() {
 	http.HandleFunc("/", common_handlers.GetRoot)
 	http.HandleFunc(bulk_update_data_repos.ROUTE_PAGE, bulk_update_data_repos.GetPage)
 	http.HandleFunc(bulk_update_data_repos.ROUTE_UPDATE, bulk_update_data_repos.GetUpdate)
-	http.HandleFunc("/click-me", getClickMe)
-	http.HandleFunc("/click-me/clicked", getClickMeClicked)
-	http.HandleFunc("/click-me/reset", getClickMeReset)
+	http.HandleFunc(click_me_data_repos.ROUTE_PAGE, click_me_data_repos.GetPage)
+	http.HandleFunc(click_me_data_repos.ROUTE_CLICKED, click_me_data_repos.GetClicked)
+	http.HandleFunc(click_me_data_repos.ROUTE_RESET, click_me_data_repos.GetReset)
 	http.HandleFunc("/click-to-edit", getClickToEdit)
 	http.HandleFunc("/click-to-edit/edit", getEdit)
 	http.HandleFunc("/click-to-edit/save", getSave)
@@ -92,24 +91,6 @@ func getHello(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
 	hello_pages.Hello("Stephen").Render(r.Context(), w)
-}
-
-func getClickMe(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	click_me_pages.ClickMePage().Render(r.Context(), w)
-}
-
-func getClickMeReset(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	click_me_components.ClickMeButton().Render(r.Context(), w)
-}
-
-func getClickMeClicked(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	click_me_components.ClickMeClicked().Render(r.Context(), w)
 }
 
 var clickToEditData = map[string]string{
