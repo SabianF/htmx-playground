@@ -45,10 +45,7 @@ func header() templ.Component {
 			templ_7745c5c3_Err = NavBar("HTMX Playground",
 				Link("/", "Home", nil),
 				Dropdown("Implementations",
-					Link("/hello", "Hello", nil),
-					Link("/click-me", "Click Me", nil),
-					Link("/click-to-edit", "Click to Edit", nil),
-					Link("/bulk-update", "Bulk Update", nil),
+					MainMenuLinks(),
 				),
 			).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {

@@ -11,58 +11,54 @@
 // Go - Serving static files: https://stackoverflow.com/a/43425767
 
 // TODO: GoTTH stack: https://www.youtube.com/watch?v=k00jVJeZxrs
-// TODO: Impl hot reloading: https://medium.com/ostinato-rigore/go-htmx-templ-tailwind-complete-project-setup-hot-reloading-2ca1ba6c28be
 // TODO: Impl middleware: https://drstearns.github.io/tutorials/gomiddleware/
 
 package main
 
 import (
 	"errors"
-	"fmt"
+	"log"
+	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
-	bulk_update "github.com/SabianF/htmx-playground/modules/bulk_update"
-	click_me "github.com/SabianF/htmx-playground/modules/click_me"
-	click_to_edit "github.com/SabianF/htmx-playground/modules/click_to_edit"
-	click_to_load_use_cases "github.com/SabianF/htmx-playground/modules/click_to_load/domain/use_cases"
+	bulk_update_data_repos "github.com/SabianF/htmx-playground/modules/bulk_update/data/repositories"
+	click_me_data_repos "github.com/SabianF/htmx-playground/modules/click_me/data/repositories"
+	click_to_edit_data_repos "github.com/SabianF/htmx-playground/modules/click_to_edit/data/repositories"
+	click_to_load_data_repos "github.com/SabianF/htmx-playground/modules/click_to_load/data/repositories"
 	common_handlers "github.com/SabianF/htmx-playground/modules/common/data/repositories"
-	helloExample "github.com/SabianF/htmx-playground/modules/hello"
-
-	"net/http"
+	hello_example_data_repos "github.com/SabianF/htmx-playground/modules/hello/data/repositories"
 )
+
+const ROUTE_ROOT string = "/"
 
 func main() {
 	handleGracefulExit()
 
-	http.HandleFunc("/", common_handlers.GetRoot)
-	http.HandleFunc("/bulk-update", getBulkUpdate)
-	http.HandleFunc("/bulk-update/submit", postBulkUpdate)
-	http.HandleFunc("/click-me", getClickMe)
-	http.HandleFunc("/click-me/clicked", getClickMeClicked)
-	http.HandleFunc("/click-me/reset", getClickMeReset)
-	http.HandleFunc("/click-to-edit", getClickToEdit)
-	http.HandleFunc("/click-to-edit/edit", getEdit)
-	http.HandleFunc("/click-to-edit/save", getSave)
-	http.HandleFunc("/click-to-edit/cancel", getCancel)
-	http.HandleFunc("/click-to-load", click_to_load_use_cases.ServePageWithInitialData)
-	http.HandleFunc("/click-to-load/", click_to_load_use_cases.LoadMoreUsers)
-	http.HandleFunc("/hello", getHello)
+	mux := http.NewServeMux()
 
-	http.Handle("/modules/common/data/sources/assets/", http.StripPrefix("/modules/", http.FileServer(http.Dir("modules"))))
+	exposeEndpoints(mux)
+	exposeResources(mux)
 
-	const port = ":3333"
-	fmt.Printf("Starting server on port %s ...\n", port)
-	err := http.ListenAndServe(port, nil)
+	mux_wrapped := NewLogger(mux)
 
-	if errors.Is(err, http.ErrServerClosed) {
-		fmt.Printf("Server closed\n")
+	startServer(mux_wrapped)
+}
 
-	} else if err != nil {
-		fmt.Printf("Error with server: %s\n", err)
-		os.Exit(1)
-	}
+type Logger struct {
+	handler http.Handler
+}
+
+func (l *Logger) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	start_time := time.Now()
+	l.handler.ServeHTTP(w, r)
+	log.Printf("%s %s %v", r.Method, r.URL.Path, time.Since(start_time))
+}
+
+func NewLogger(handler http.Handler) *Logger {
+	return &Logger{handler: handler}
 }
 
 func handleGracefulExit() {
@@ -70,107 +66,41 @@ func handleGracefulExit() {
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 	go func() {
 		<-c
-		fmt.Printf("Received SIGTERM. Exiting...\n")
+		log.Printf("Received SIGTERM. Exiting...\n")
 		os.Exit(1)
 	}()
 }
 
-func getBulkUpdate(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	bulk_update.BulkUpdate().Render(r.Context(), w)
+func exposeEndpoints(mux *http.ServeMux) {
+	mux.HandleFunc(ROUTE_ROOT, common_handlers.GetPage)
+	mux.HandleFunc(bulk_update_data_repos.ROUTE_PAGE, bulk_update_data_repos.GetPage)
+	mux.HandleFunc(bulk_update_data_repos.ROUTE_UPDATE, bulk_update_data_repos.GetUpdate)
+	mux.HandleFunc(click_me_data_repos.ROUTE_PAGE, click_me_data_repos.GetPage)
+	mux.HandleFunc(click_me_data_repos.ROUTE_CLICKED, click_me_data_repos.GetClicked)
+	mux.HandleFunc(click_me_data_repos.ROUTE_RESET, click_me_data_repos.GetReset)
+	mux.HandleFunc(click_to_edit_data_repos.ROUTE_PAGE, click_to_edit_data_repos.GetPage)
+	mux.HandleFunc(click_to_edit_data_repos.ROUTE_EDIT, click_to_edit_data_repos.GetEdit)
+	mux.HandleFunc(click_to_edit_data_repos.ROUTE_SAVE, click_to_edit_data_repos.GetSave)
+	mux.HandleFunc(click_to_edit_data_repos.ROUTE_CANCEL, click_to_edit_data_repos.GetCancel)
+	mux.HandleFunc(click_to_load_data_repos.ROUTE_PAGE, click_to_load_data_repos.GetPage)
+	mux.HandleFunc(click_to_load_data_repos.ROUTE_GET_USERS, click_to_load_data_repos.GetUsers)
+	mux.HandleFunc(hello_example_data_repos.ROUTE_PAGE, hello_example_data_repos.GetPage)
 }
 
-func postBulkUpdate(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	r.ParseForm()
-	data := map[string][]string(r.PostForm)
-
-	bulk_update.BulkUpdateToast(data).Render(r.Context(), w)
+func exposeResources(mux *http.ServeMux) {
+	mux.Handle("/modules/common/data/sources/assets/", http.StripPrefix("/modules/", http.FileServer(http.Dir("modules"))))
 }
 
-func getHello(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
+func startServer(mux *Logger) {
+	const port = ":3333"
+	log.Printf("Starting server on port %s ...\n", port)
+	err := http.ListenAndServe(port, mux)
 
-	helloExample.Hello("Stephen").Render(r.Context(), w)
-}
+	if errors.Is(err, http.ErrServerClosed) {
+		log.Printf("Server closed\n")
 
-func getClickMe(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	click_me.ClickMePage().Render(r.Context(), w)
-}
-
-func getClickMeReset(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	click_me.ClickMeButton().Render(r.Context(), w)
-}
-
-func getClickMeClicked(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	click_me.ClickMeClicked().Render(r.Context(), w)
-}
-
-var clickToEditData = map[string]string{
-	"firstName"	: "Joe",
-	"lastName"	: "Blow",
-	"email"			: "joe@blow.com",
-}
-
-func getClickToEdit(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	click_to_edit.ClickToEditPage(
-		clickToEditData["firstName"],
-		clickToEditData["lastName"],
-		clickToEditData["email"],
-	).Render(r.Context(), w)
-}
-
-func getEdit(w http.ResponseWriter, r *http.Request	) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	click_to_edit.ClickToEditForm(
-		clickToEditData["firstName"],
-		clickToEditData["lastName"],
-		clickToEditData["email"],
-	).Render(r.Context(), w)
-}
-
-func getCancel(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	click_to_edit.ClickToEditText(
-		clickToEditData["firstName"],
-		clickToEditData["lastName"],
-		clickToEditData["email"],
-	).Render(r.Context(), w)
-}
-
-func getSave(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	firstName := r.PostFormValue("firstName")
-	if firstName != "" && firstName != clickToEditData["firstName"] {
-		clickToEditData["firstName"] = firstName
+	} else if err != nil {
+		log.Printf("Error with server: %s\n", err)
+		os.Exit(1)
 	}
-
-	lastName := r.PostFormValue("lastName")
-	if lastName != "" && lastName != clickToEditData["lastName"] {
-		clickToEditData["lastName"] = lastName
-	}
-
-	email := r.PostFormValue("email")
-	if email != "" && email != clickToEditData["email"] {
-		clickToEditData["email"] = email
-	}
-
-	click_to_edit.ClickToEditText(
-		clickToEditData["firstName"],
-		clickToEditData["lastName"],
-		clickToEditData["email"],
-	).Render(r.Context(), w)
 }

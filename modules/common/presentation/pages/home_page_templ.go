@@ -62,7 +62,11 @@ func HomePage() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1><ul hx-boost=\"true\"><li><a href=\"/hello\">Hello</a></li><li><a href=\"/click-me\">Click me</a></li><li><a href=\"/click-to-edit\">Click to edit</a></li><li><a href=\"/bulk-update\">Bulk update</a></li><li><a href=\"/click-to-load\">Click to Load</a></li></ul>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</h1>")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			templ_7745c5c3_Err = common_components.MainMenuList().Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

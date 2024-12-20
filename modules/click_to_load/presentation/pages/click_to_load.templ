@@ -2,62 +2,51 @@
 package click_to_load
 
 import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
+import click_to_load_components "github.com/SabianF/htmx-playground/modules/click_to_load/presentation/components"
 
-templ ClickToLoad(headings []string, initialRows [][]string) {
+templ ClickToLoad(
+	route_get_users string,
+	next_page string,
+	headings []string,
+	initialRows [][]string,
+) {
 
-  {{
+	{{
     title := "Click to Load Example"
     description := "A table of database items with a button to load the next page of data."
-    nextPageNum := "2"
-  }}
+	}}
 
-  @common_components.Page(title, description) {
-    <h1>{ title }</h1>
-    @ClickToLoadTable(headings, initialRows, nextPageNum)
-  }
+	@common_components.Page(title, description) {
+		<h1>{ title }</h1>
+		@ClickToLoadTable(
+			route_get_users,
+			next_page,
+			headings,
+			initialRows,
+		)
+	}
 }
 
 templ ClickToLoadTable(
-  headings []string,
-  initialRows [][]string,
-  nextPageNum string,
+	route_get_users string,
+	next_page string,
+	headings []string,
+	initialRows [][]string,
 ) {
-  <table>
-    <thead>
-      <tr>
-        for _, headingField := range headings {
-          <th>{ headingField }</th>
-        }
-      </tr>
-    </thead>
-    <tbody>
-      @ClickToLoadRows(initialRows, nextPageNum)
-    </tbody>
-  </table>
-}
-
-templ ClickToLoadRows(rows [][]string, nextPageNum string) {
-  for _, row := range rows {
-    <tr>
-      for _, rowField := range row {
-        <td>{ rowField }</td>
-      }
-    </tr>
-  }
-  @ClickToLoadButton(nextPageNum)
-}
-
-templ ClickToLoadButton(pageToLoad string) {
-  <tr id="next-rows">
-    <td>
-      <button
-        hx-get={ "/click-to-load/?page=" + pageToLoad }
-        hx-target="#next-rows"
-        hx-swap="outerHTML"
-      >
-        Load more...
-        <span class="htmx-indicator" aria-busy="true"></span>
-      </button>
-    </td>
-  </tr>
+	<table>
+		<thead>
+			<tr>
+				for _, headingField := range headings {
+					<th>{ headingField }</th>
+				}
+			</tr>
+		</thead>
+		<tbody>
+			@click_to_load_components.Rows(
+				route_get_users,
+				next_page,
+				initialRows,
+			)
+		</tbody>
+	</table>
 }

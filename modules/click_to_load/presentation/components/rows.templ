@@ -1,0 +1,35 @@
+
+package click_to_load
+
+const LAST_ROW_ID string = "next-rows"
+
+templ Rows(
+	route_get_users string,
+	next_page string,
+	rows [][]string,
+) {
+	for _, row := range rows {
+		<tr>
+			for _, column := range row {
+				<td>{ column }</td>
+			}
+		</tr>
+	}
+	@Button(route_get_users, next_page)
+}
+
+templ Button(route_get_users string, pageToLoad string) {
+	<tr id={ LAST_ROW_ID }>
+		<td colspan="3">
+			<button
+				hx-get={ route_get_users + "?page=" + pageToLoad }
+				hx-target={ "#" + LAST_ROW_ID }
+				hx-swap="outerHTML"
+        class="container-fluid"
+			>
+				Load more
+        <span class="htmx-indicator" aria-busy="true" aria-label="Loading..."></span>
+			</button>
+		</td>
+	</tr>
+}

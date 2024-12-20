@@ -1,0 +1,14 @@
+
+package click_me
+
+templ ClickMeButton(route_clicked string) {
+  <div id="click-me">
+    <button
+      hx-get={ route_clicked }
+      hx-target="this"
+      hx-swap="outerHTML"
+    >
+      Click me!
+    </button>
+  </div>
+}

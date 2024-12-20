@@ -1,0 +1,45 @@
+
+package click_to_edit
+
+import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
+
+templ ClickToEditPage(
+  route_edit string,
+  firstName string,
+  lastName string,
+  email string,
+) {
+
+  {{
+    title := "Click to Edit Example"
+    description := "A form that updates string values, based on user-filled fields"
+  }}
+
+  @common_components.Page(title, description) {
+    @heading()
+    @ClickToEditText(
+      route_edit,
+      firstName,
+      lastName,
+      email,
+    )
+  }
+}
+
+templ heading() {
+  <h1>Click to edit</h1>
+}
+
+templ ClickToEditText(
+  route_edit string,
+  firstName string,
+  lastName string,
+  email string,
+) {
+  <div hx-target="this" hx-swap="outerHTML">
+    <div><label>First name</label>: {firstName}</div>
+    <div><label>Last name</label>: {lastName}</div>
+    <div><label>Email</label>: {email}</div>
+    <button hx-get={ route_edit } class="btn primary">Edit</button>
+  </div>
+}
