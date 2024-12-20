@@ -3,7 +3,7 @@ package bulk_update
 
 import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
 
-templ BulkUpdatePage() {
+templ BulkUpdatePage(update_route string) {
 
   {{
     title := "Bulk Update Example"
@@ -13,7 +13,7 @@ templ BulkUpdatePage() {
   @common_components.Page(title, description) {
     <form
       id="checked-contacts"
-      hx-post="/bulk-update/submit"
+      hx-post={ update_route }
       hx-swap="outerHTML settle:3s"
       hx-target="#toast"
     >

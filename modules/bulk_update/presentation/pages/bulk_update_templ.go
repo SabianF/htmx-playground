@@ -11,7 +11,7 @@ import templruntime "github.com/a-h/templ/runtime"
 
 import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
 
-func BulkUpdatePage() templ.Component {
+func BulkUpdatePage(update_route string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -47,7 +47,20 @@ func BulkUpdatePage() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form id=\"checked-contacts\" hx-post=\"/bulk-update/submit\" hx-swap=\"outerHTML settle:3s\" hx-target=\"#toast\"><table><thead><tr><th>Name</th><th>Email</th><th>Active</th></tr></thead> <tbody id=\"tbody\"><tr><td>Joe Smith</td><td>joe@smith.org</td><td><input type=\"checkbox\" name=\"active:joe@smith.org\"></td></tr><tr><td>John Statham</td><td>john@statham.org</td><td><input type=\"checkbox\" name=\"active:john@statham.org\"></td></tr><tr><td>Bob Scott</td><td>bob@scott.org</td><td><input type=\"checkbox\" name=\"active:bob@scott.org\"></td></tr></tbody></table><input type=\"submit\" value=\"Bulk Update\" class=\"btn primary\"> <span id=\"toast\"></span></form>")
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<form id=\"checked-contacts\" hx-post=\"")
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			var templ_7745c5c3_Var3 string
+			templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(update_route)
+			if templ_7745c5c3_Err != nil {
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/bulk_update/presentation/pages/bulk_update.templ`, Line: 16, Col: 28}
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" hx-swap=\"outerHTML settle:3s\" hx-target=\"#toast\"><table><thead><tr><th>Name</th><th>Email</th><th>Active</th></tr></thead> <tbody id=\"tbody\"><tr><td>Joe Smith</td><td>joe@smith.org</td><td><input type=\"checkbox\" name=\"active:joe@smith.org\"></td></tr><tr><td>John Statham</td><td>john@statham.org</td><td><input type=\"checkbox\" name=\"active:john@statham.org\"></td></tr><tr><td>Bob Scott</td><td>bob@scott.org</td><td><input type=\"checkbox\" name=\"active:bob@scott.org\"></td></tr></tbody></table><input type=\"submit\" value=\"Bulk Update\" class=\"btn primary\"> <span id=\"toast\"></span></form>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
