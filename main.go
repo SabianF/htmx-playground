@@ -24,8 +24,7 @@ import (
 
 	bulk_update_data_repos "github.com/SabianF/htmx-playground/modules/bulk_update/data/repositories"
 	click_me_data_repos "github.com/SabianF/htmx-playground/modules/click_me/data/repositories"
-	click_to_edit_components "github.com/SabianF/htmx-playground/modules/click_to_edit/presentation/components"
-	click_to_edit_pages "github.com/SabianF/htmx-playground/modules/click_to_edit/presentation/pages"
+	click_to_edit_data_repos "github.com/SabianF/htmx-playground/modules/click_to_edit/data/repositories"
 	click_to_load_use_cases "github.com/SabianF/htmx-playground/modules/click_to_load/domain/use_cases"
 	common_handlers "github.com/SabianF/htmx-playground/modules/common/data/repositories"
 	hello_pages "github.com/SabianF/htmx-playground/modules/hello/presentation/pages"
@@ -62,10 +61,10 @@ func exposeEndpoints() {
 	http.HandleFunc(click_me_data_repos.ROUTE_PAGE, click_me_data_repos.GetPage)
 	http.HandleFunc(click_me_data_repos.ROUTE_CLICKED, click_me_data_repos.GetClicked)
 	http.HandleFunc(click_me_data_repos.ROUTE_RESET, click_me_data_repos.GetReset)
-	http.HandleFunc("/click-to-edit", getClickToEdit)
-	http.HandleFunc("/click-to-edit/edit", getEdit)
-	http.HandleFunc("/click-to-edit/save", getSave)
-	http.HandleFunc("/click-to-edit/cancel", getCancel)
+	http.HandleFunc(click_to_edit_data_repos.ROUTE_PAGE, click_to_edit_data_repos.GetPage)
+	http.HandleFunc(click_to_edit_data_repos.ROUTE_EDIT, click_to_edit_data_repos.GetEdit)
+	http.HandleFunc(click_to_edit_data_repos.ROUTE_SAVE, click_to_edit_data_repos.GetSave)
+	http.HandleFunc(click_to_edit_data_repos.ROUTE_CANCEL, click_to_edit_data_repos.GetCancel)
 	http.HandleFunc("/click-to-load", click_to_load_use_cases.ServePageWithInitialData)
 	http.HandleFunc("/click-to-load/", click_to_load_use_cases.LoadMoreUsers)
 	http.HandleFunc("/hello", getHello)
@@ -93,65 +92,4 @@ func getHello(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("%s %s\n", r.Method, r.URL)
 
 	hello_pages.Hello("Stephen").Render(r.Context(), w)
-}
-
-var clickToEditData = map[string]string{
-	"firstName"	: "Joe",
-	"lastName"	: "Blow",
-	"email"			: "joe@blow.com",
-}
-
-func getClickToEdit(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	click_to_edit_pages.ClickToEditPage(
-		clickToEditData["firstName"],
-		clickToEditData["lastName"],
-		clickToEditData["email"],
-	).Render(r.Context(), w)
-}
-
-func getEdit(w http.ResponseWriter, r *http.Request	) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	click_to_edit_components.ClickToEditForm(
-		clickToEditData["firstName"],
-		clickToEditData["lastName"],
-		clickToEditData["email"],
-	).Render(r.Context(), w)
-}
-
-func getCancel(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	click_to_edit_pages.ClickToEditText(
-		clickToEditData["firstName"],
-		clickToEditData["lastName"],
-		clickToEditData["email"],
-	).Render(r.Context(), w)
-}
-
-func getSave(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	firstName := r.PostFormValue("firstName")
-	if firstName != "" && firstName != clickToEditData["firstName"] {
-		clickToEditData["firstName"] = firstName
-	}
-
-	lastName := r.PostFormValue("lastName")
-	if lastName != "" && lastName != clickToEditData["lastName"] {
-		clickToEditData["lastName"] = lastName
-	}
-
-	email := r.PostFormValue("email")
-	if email != "" && email != clickToEditData["email"] {
-		clickToEditData["email"] = email
-	}
-
-	click_to_edit_pages.ClickToEditText(
-		clickToEditData["firstName"],
-		clickToEditData["lastName"],
-		clickToEditData["email"],
-	).Render(r.Context(), w)
 }

@@ -12,6 +12,7 @@ import templruntime "github.com/a-h/templ/runtime"
 import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
 
 func ClickToEditPage(
+	route_edit string,
 	firstName string,
 	lastName string,
 	email string,
@@ -60,6 +61,7 @@ func ClickToEditPage(
 				return templ_7745c5c3_Err
 			}
 			templ_7745c5c3_Err = ClickToEditText(
+				route_edit,
 				firstName,
 				lastName,
 				email,
@@ -107,6 +109,7 @@ func heading() templ.Component {
 }
 
 func ClickToEditText(
+	route_edit string,
 	firstName string,
 	lastName string,
 	email string,
@@ -138,7 +141,7 @@ func ClickToEditText(
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(firstName)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_edit/presentation/pages/click_to_edit.templ`, Line: 37, Col: 46}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_edit/presentation/pages/click_to_edit.templ`, Line: 40, Col: 46}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -151,7 +154,7 @@ func ClickToEditText(
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(lastName)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_edit/presentation/pages/click_to_edit.templ`, Line: 38, Col: 44}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_edit/presentation/pages/click_to_edit.templ`, Line: 41, Col: 44}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {
@@ -164,13 +167,26 @@ func ClickToEditText(
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(email)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_edit/presentation/pages/click_to_edit.templ`, Line: 39, Col: 37}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_edit/presentation/pages/click_to_edit.templ`, Line: 42, Col: 37}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><button hx-get=\"/click-to-edit/edit\" class=\"btn primary\">Edit</button></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div><button hx-get=\"")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		var templ_7745c5c3_Var8 string
+		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(route_edit)
+		if templ_7745c5c3_Err != nil {
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/click_to_edit/presentation/pages/click_to_edit.templ`, Line: 43, Col: 31}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"btn primary\">Edit</button></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
