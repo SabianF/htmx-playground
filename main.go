@@ -11,7 +11,6 @@
 // Go - Serving static files: https://stackoverflow.com/a/43425767
 
 // TODO: GoTTH stack: https://www.youtube.com/watch?v=k00jVJeZxrs
-// TODO: Impl hot reloading: https://medium.com/ostinato-rigore/go-htmx-templ-tailwind-complete-project-setup-hot-reloading-2ca1ba6c28be
 // TODO: Impl middleware: https://drstearns.github.io/tutorials/gomiddleware/
 
 package main
@@ -53,6 +52,9 @@ func handleGracefulExit() {
 }
 
 func exposeEndpoints() {
+
+	// TODO: Create routes in each module, then import all here to expose
+
 	http.HandleFunc("/", common_handlers.GetRoot)
 	http.HandleFunc("/bulk-update", getBulkUpdate)
 	http.HandleFunc("/bulk-update/submit", postBulkUpdate)

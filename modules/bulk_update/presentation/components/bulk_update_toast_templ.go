@@ -9,7 +9,7 @@ package bulk_update
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func bulkUpdateToast(updatedUsers map[string][]string) templ.Component {
+func BulkUpdateToast(updatedUsers map[string][]string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -52,7 +52,7 @@ func bulkUpdateToast(updatedUsers map[string][]string) templ.Component {
 				var templ_7745c5c3_Var2 string
 				templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(updatedUser)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/bulk_update/bulk_update_toast.templ`, Line: 15, Col: 30}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/bulk_update/presentation/components/bulk_update_toast.templ`, Line: 15, Col: 30}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 				if templ_7745c5c3_Err != nil {
@@ -71,7 +71,7 @@ func bulkUpdateToast(updatedUsers map[string][]string) templ.Component {
 						var templ_7745c5c3_Var3 string
 						templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(updatedUserProp)
 						if templ_7745c5c3_Err != nil {
-							return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/bulk_update/bulk_update_toast.templ`, Line: 18, Col: 38}
+							return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/bulk_update/presentation/components/bulk_update_toast.templ`, Line: 18, Col: 38}
 						}
 						_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 						if templ_7745c5c3_Err != nil {
@@ -89,7 +89,7 @@ func bulkUpdateToast(updatedUsers map[string][]string) templ.Component {
 						var templ_7745c5c3_Var4 string
 						templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(updatedUserProp)
 						if templ_7745c5c3_Err != nil {
-							return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/bulk_update/bulk_update_toast.templ`, Line: 20, Col: 40}
+							return templ.Error{Err: templ_7745c5c3_Err, FileName: `modules/bulk_update/presentation/components/bulk_update_toast.templ`, Line: 20, Col: 40}
 						}
 						_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 						if templ_7745c5c3_Err != nil {
