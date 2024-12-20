@@ -6,16 +6,18 @@ import (
 	pages "github.com/SabianF/htmx-playground/modules/click_to_load/presentation/pages"
 )
 
-func LoadPage(
-	route_get_users string,
-	next_page string,
-	userProps []string,
-	usersStringified [][]string,
-) templ.Component {
+type LoadPageArgs struct {
+	Route_get_users string
+	Next_page string
+	UserProps []string
+	UsersStringified [][]string
+}
+
+func LoadPage(args LoadPageArgs) templ.Component {
 	return pages.ClickToLoad(
-		route_get_users,
-		next_page,
-		userProps,
-		usersStringified,
+		args.Route_get_users,
+		args.Next_page,
+		args.UserProps,
+		args.UsersStringified,
 	)
 }

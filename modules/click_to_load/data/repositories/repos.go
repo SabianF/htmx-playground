@@ -24,12 +24,14 @@ func GetPage(w http.ResponseWriter, r *http.Request) {
 	users := fetchUserData(DEFAULT_PAGE, DEFAULT_PAGINATION)
 	usersStringified := stringifyUsers(users)
 
-	use_cases.LoadPage(
-		ROUTE_GET_USERS,
-		next_page,
-		userProps,
-		usersStringified,
-	).Render(r.Context(), w)
+	args := use_cases.LoadPageArgs{
+		Route_get_users:  ROUTE_GET_USERS,
+		Next_page:        next_page,
+		UserProps:        userProps,
+		UsersStringified: usersStringified,
+	}
+
+	use_cases.LoadPage(args).Render(r.Context(), w)
 }
 
 const ROUTE_GET_USERS string = "/click-to-load/users"
