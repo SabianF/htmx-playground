@@ -18,6 +18,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
@@ -27,9 +28,7 @@ import (
 	click_to_edit_data_repos "github.com/SabianF/htmx-playground/modules/click_to_edit/data/repositories"
 	click_to_load_data_repos "github.com/SabianF/htmx-playground/modules/click_to_load/data/repositories"
 	common_handlers "github.com/SabianF/htmx-playground/modules/common/data/repositories"
-	hello_pages "github.com/SabianF/htmx-playground/modules/hello/presentation/pages"
-
-	"net/http"
+	hello_example_data_repos "github.com/SabianF/htmx-playground/modules/hello/data/repositories"
 )
 
 const ROUTE_ROOT string = "/"
@@ -52,9 +51,6 @@ func handleGracefulExit() {
 }
 
 func exposeEndpoints() {
-
-	// TODO: Create routes in each module, then import all here to expose
-
 	http.HandleFunc(ROUTE_ROOT, common_handlers.GetRoot)
 	http.HandleFunc(bulk_update_data_repos.ROUTE_PAGE, bulk_update_data_repos.GetPage)
 	http.HandleFunc(bulk_update_data_repos.ROUTE_UPDATE, bulk_update_data_repos.GetUpdate)
@@ -67,7 +63,7 @@ func exposeEndpoints() {
 	http.HandleFunc(click_to_edit_data_repos.ROUTE_CANCEL, click_to_edit_data_repos.GetCancel)
 	http.HandleFunc(click_to_load_data_repos.ROUTE_PAGE, click_to_load_data_repos.GetPage)
 	http.HandleFunc(click_to_load_data_repos.ROUTE_GET_USERS, click_to_load_data_repos.GetUsers)
-	http.HandleFunc("/hello", getHello)
+	http.HandleFunc(hello_example_data_repos.ROUTE_PAGE, hello_example_data_repos.GetPage)
 }
 
 func exposeResources() {
@@ -86,10 +82,4 @@ func startServer() {
 		fmt.Printf("Error with server: %s\n", err)
 		os.Exit(1)
 	}
-}
-
-func getHello(w http.ResponseWriter, r *http.Request) {
-	fmt.Printf("%s %s\n", r.Method, r.URL)
-
-	hello_pages.Hello("Stephen").Render(r.Context(), w)
 }

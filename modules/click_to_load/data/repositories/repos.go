@@ -20,7 +20,6 @@ const DEFAULT_PAGINATION int = 10
 func GetPage(w http.ResponseWriter, r *http.Request) {
 
 	next_page := strconv.Itoa(DEFAULT_PAGE + 1)
-	fmt.Printf("next_page: %s", next_page)
 	userProps := GetUserProps()
 	users := fetchUserData(DEFAULT_PAGE, DEFAULT_PAGINATION)
 	usersStringified := stringifyUsers(users)
