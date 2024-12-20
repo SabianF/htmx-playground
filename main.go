@@ -17,11 +17,12 @@ package main
 
 import (
 	"errors"
-	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 
 	bulk_update_data_repos "github.com/SabianF/htmx-playground/modules/bulk_update/data/repositories"
 	click_me_data_repos "github.com/SabianF/htmx-playground/modules/click_me/data/repositories"
@@ -40,7 +41,24 @@ func main() {
 
 	exposeEndpoints(mux)
 	exposeResources(mux)
-	startServer(mux)
+
+	mux_wrapped := NewLogger(mux)
+
+	startServer(mux_wrapped)
+}
+
+type Logger struct {
+	handler http.Handler
+}
+
+func (l *Logger) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+	start_time := time.Now()
+	l.handler.ServeHTTP(w, r)
+	log.Printf("%s %s %v", r.Method, r.URL.Path, time.Since(start_time))
+}
+
+func NewLogger(handler http.Handler) *Logger {
+	return &Logger{handler: handler}
 }
 
 func handleGracefulExit() {
@@ -48,7 +66,7 @@ func handleGracefulExit() {
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 	go func() {
 		<-c
-		fmt.Printf("Received SIGTERM. Exiting...\n")
+		log.Printf("Received SIGTERM. Exiting...\n")
 		os.Exit(1)
 	}()
 }
@@ -73,16 +91,16 @@ func exposeResources(mux *http.ServeMux) {
 	mux.Handle("/modules/common/data/sources/assets/", http.StripPrefix("/modules/", http.FileServer(http.Dir("modules"))))
 }
 
-func startServer(mux *http.ServeMux) {
+func startServer(mux *Logger) {
 	const port = ":3333"
-	fmt.Printf("Starting server on port %s ...\n", port)
+	log.Printf("Starting server on port %s ...\n", port)
 	err := http.ListenAndServe(port, mux)
 
 	if errors.Is(err, http.ErrServerClosed) {
-		fmt.Printf("Server closed\n")
+		log.Printf("Server closed\n")
 
 	} else if err != nil {
-		fmt.Printf("Error with server: %s\n", err)
+		log.Printf("Error with server: %s\n", err)
 		os.Exit(1)
 	}
 }
