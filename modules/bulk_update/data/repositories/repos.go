@@ -19,3 +19,8 @@ func GetUpdate(w http.ResponseWriter, r *http.Request) {
 	var form_data map[string][]string = r.PostForm
 	bulk_update_use_cases.Update(form_data).Render(r.Context(), w)
 }
+
+func AddRoutes(mux *http.ServeMux) {
+	mux.HandleFunc(ROUTE_PAGE, GetPage)
+	mux.HandleFunc(ROUTE_UPDATE, GetUpdate)
+}
