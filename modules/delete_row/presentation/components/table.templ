@@ -1,0 +1,32 @@
+
+package delete_row
+
+import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
+
+templ Table(headings []string, rows [][]string, button_delete_route string) {
+  <table>
+    <thead>
+      @common_components.HeadingRow(headings)
+    </thead>
+    <tbody
+      hx-confirm="Are you sure?"
+      hx-target="closest tr"
+      hx-swap="outerHTML swap:1s"
+    >
+      for _, row := range rows {
+        <tr>
+          for _, row_data := range row {
+            <td>{ row_data }</td>
+          }
+          <td>
+            @ButtonDelete(button_delete_route)
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+}
+
+templ ButtonDelete(route string) {
+  <button hx-delete={ route }>Delete</button>
+}

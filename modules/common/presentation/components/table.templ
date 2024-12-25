@@ -1,0 +1,39 @@
+
+package common
+
+templ Table(headings []string, rows [][]string) {
+  <table>
+    <thead>
+      @HeadingRow(headings)
+    </thead>
+    <tbody>
+      @Rows(rows)
+      { children... }
+    </tbody>
+  </table>
+}
+
+templ HeadingRow(headings []string) {
+  <tr>
+    for _, heading := range headings {
+      <th>{ heading }</th>
+    }
+    { children... }
+  </tr>
+}
+
+templ Rows(rows [][]string) {
+  for _, row := range rows {
+    <tr>
+      @Row(row)
+    </tr>
+  }
+  { children... }
+}
+
+templ Row(row []string) {
+  for _, row_data := range row {
+    <td>{ row_data }</td>
+  }
+  { children... }
+}

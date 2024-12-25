@@ -26,6 +26,7 @@ import (
 
 	data_repos "github.com/SabianF/htmx-playground/modules/common/data/repositories"
 	sources "github.com/SabianF/htmx-playground/modules/common/data/sources"
+	delete_row_data_repos "github.com/SabianF/htmx-playground/modules/delete_row/data/repositories"
 
 	bulk_update_data_repos "github.com/SabianF/htmx-playground/modules/bulk_update/data/repositories"
 	click_me_data_repos "github.com/SabianF/htmx-playground/modules/click_me/data/repositories"
@@ -70,6 +71,7 @@ func exposeEndpoints(mux *http.ServeMux) {
 	click_me_data_repos.AddRoutes(mux)
 	click_to_edit_data_repos.AddRoutes(mux)
 	click_to_load_data_repos.AddRoutes(mux)
+	delete_row_data_repos.AddRoutes(mux)
 	hello_example_data_repos.AddRoutes(mux)
 }
 

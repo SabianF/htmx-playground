@@ -1,0 +1,22 @@
+
+package delete_row
+
+import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
+import components "github.com/SabianF/htmx-playground/modules/delete_row/presentation/components"
+
+templ DeleteRowPage(
+  table_headings []string,
+  table_rows [][]string,
+  button_delete_route string,
+) {
+
+  {{
+    title := "Delete Row"
+    description := "Example of deleting a row from a table using HTMX + Go"
+  }}
+
+  @common_components.Page(title, description) {
+    <h1>{ title }</h1>
+    @components.Table(table_headings, table_rows, button_delete_route)
+  }
+}
