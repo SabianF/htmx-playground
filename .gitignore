@@ -24,6 +24,11 @@ go.work.sum
 # custom
 .templates/
 .pico*
+.templ-watch.sh
+
+# Templ generated files
+**/*_templ.go
+**/*_templ.txt
 
 # env file
 .env
