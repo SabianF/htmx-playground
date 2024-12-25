@@ -70,7 +70,7 @@ func exposeEndpoints(mux *http.ServeMux) {
 	click_me_data_repos.AddRoutes(mux)
 	click_to_edit_data_repos.AddRoutes(mux)
 	click_to_load_data_repos.AddRoutes(mux)
-	mux.HandleFunc(hello_example_data_repos.ROUTE_PAGE, hello_example_data_repos.GetPage)
+	hello_example_data_repos.AddRoutes(mux)
 }
 
 func exposeResources(mux *http.ServeMux) {
