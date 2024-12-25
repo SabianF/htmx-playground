@@ -12,23 +12,25 @@
 
 // TODO: GoTTH stack: https://www.youtube.com/watch?v=k00jVJeZxrs
 // TODO: Impl middleware: https://drstearns.github.io/tutorials/gomiddleware/
+// TODO: Easy backend solution: https://appwrite.io/
+// TODO: Simple motion animations https://auto-animate.formkit.com/#usage
 
 package main
 
 import (
 	"errors"
-	"log"
 	"net/http"
 	"os"
 	"os/signal"
 	"syscall"
 
+	data_repos "github.com/SabianF/htmx-playground/modules/common/data/repositories"
+	sources "github.com/SabianF/htmx-playground/modules/common/data/sources"
+
 	bulk_update_data_repos "github.com/SabianF/htmx-playground/modules/bulk_update/data/repositories"
 	click_me_data_repos "github.com/SabianF/htmx-playground/modules/click_me/data/repositories"
 	click_to_edit_data_repos "github.com/SabianF/htmx-playground/modules/click_to_edit/data/repositories"
 	click_to_load_data_repos "github.com/SabianF/htmx-playground/modules/click_to_load/data/repositories"
-	data_repos "github.com/SabianF/htmx-playground/modules/common/data/repositories"
-	sources "github.com/SabianF/htmx-playground/modules/common/data/sources"
 	hello_example_data_repos "github.com/SabianF/htmx-playground/modules/hello/data/repositories"
 )
 
@@ -52,7 +54,7 @@ func handleGracefulExit() {
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 	go func() {
 		<-c
-		log.Printf("Received SIGTERM. Exiting...\n")
+		data_repos.Log("Received SIGTERM. Exiting...\n")
 		os.Exit(1)
 	}()
 }
@@ -79,14 +81,14 @@ func exposeResources(mux *http.ServeMux) {
 
 func startServer(mux *sources.Logger) {
 	const port = ":3333"
-	log.Printf("Starting server on port %s ...\n", port)
+	data_repos.Log("Starting server on port %s ...\n", port)
 	err := http.ListenAndServe(port, mux)
 
 	if errors.Is(err, http.ErrServerClosed) {
-		log.Printf("Server closed\n")
+		data_repos.Log("Server closed\n")
 
 	} else if err != nil {
-		log.Printf("Error with server: %s\n", err)
+		data_repos.Log("Error with server: %s\n", err)
 		os.Exit(1)
 	}
 }

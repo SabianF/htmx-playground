@@ -11,6 +11,10 @@ func NewLogger(handler http.Handler) *sources.Logger {
 	return &sources.Logger{Handler: handler}
 }
 
+func Log(format string, v ...any) {
+	sources.Printf(format, v...)
+}
+
 func GetPage(w http.ResponseWriter, r *http.Request) {
 	homePage := common_use_cases.GetHomePage()
 

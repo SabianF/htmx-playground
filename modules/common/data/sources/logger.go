@@ -15,3 +15,7 @@ func (l *Logger) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	l.Handler.ServeHTTP(w, r)
 	log.Printf("%s %s %v", r.Method, r.URL.Path, time.Since(start_time))
 }
+
+func Printf(format string, v ...any) {
+	log.Printf(format, v...)
+}
