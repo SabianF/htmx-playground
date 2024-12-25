@@ -44,7 +44,12 @@ func main() {
 	exposeEndpoints(mux)
 	exposeResources(mux)
 
-	mux_wrapped := data_repos.NewLogger(mux)
+	logger := sources.Notify()
+
+	mux_wrapped := data_repos.AddMiddleware(
+		mux,
+		logger,
+	)
 
 	startServer(mux_wrapped)
 }
@@ -79,7 +84,7 @@ func exposeResources(mux *http.ServeMux) {
 	mux.Handle("/modules/common/data/sources/assets/", http.StripPrefix("/modules/", http.FileServer(http.Dir("modules"))))
 }
 
-func startServer(mux *sources.Logger) {
+func startServer(mux http.Handler) {
 	const port = ":3333"
 	data_repos.Log("Starting server on port %s ...\n", port)
 	err := http.ListenAndServe(port, mux)

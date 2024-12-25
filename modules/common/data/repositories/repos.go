@@ -7,8 +7,13 @@ import (
 	common_use_cases "github.com/SabianF/htmx-playground/modules/common/domain/use_cases"
 )
 
-func NewLogger(handler http.Handler) *sources.Logger {
-	return &sources.Logger{Handler: handler}
+func AddMiddleware(handler http.Handler, middlewares ...sources.Adapter) http.Handler {
+
+	for _, middleware := range middlewares {
+		handler = middleware(handler)
+	}
+
+	return handler
 }
 
 func Log(format string, v ...any) {
