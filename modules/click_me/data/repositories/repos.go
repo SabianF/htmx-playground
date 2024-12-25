@@ -22,3 +22,9 @@ func GetClicked(w http.ResponseWriter, r *http.Request) {
 func GetReset(w http.ResponseWriter, r *http.Request) {
 	click_me.ClickMeButton(ROUTE_CLICKED).Render(r.Context(), w)
 }
+
+func AddRoutes(mux *http.ServeMux) {
+	mux.HandleFunc(ROUTE_PAGE, GetPage)
+	mux.HandleFunc(ROUTE_CLICKED, GetClicked)
+	mux.HandleFunc(ROUTE_RESET, GetReset)
+}
