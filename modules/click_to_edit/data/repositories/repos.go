@@ -72,3 +72,10 @@ func GetSave(w http.ResponseWriter, r *http.Request) {
 		clickToEditData["email"],
 	).Render(r.Context(), w)
 }
+
+func AddRoutes(mux *http.ServeMux) {
+	mux.HandleFunc(ROUTE_PAGE, GetPage)
+	mux.HandleFunc(ROUTE_EDIT, GetEdit)
+	mux.HandleFunc(ROUTE_SAVE, GetSave)
+	mux.HandleFunc(ROUTE_CANCEL, GetCancel)
+}
