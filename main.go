@@ -69,8 +69,7 @@ func exposeEndpoints(mux *http.ServeMux) {
 	bulk_update_data_repos.AddRoutes(mux)
 	click_me_data_repos.AddRoutes(mux)
 	click_to_edit_data_repos.AddRoutes(mux)
-	mux.HandleFunc(click_to_load_data_repos.ROUTE_PAGE, click_to_load_data_repos.GetPage)
-	mux.HandleFunc(click_to_load_data_repos.ROUTE_GET_USERS, click_to_load_data_repos.GetUsers)
+	click_to_load_data_repos.AddRoutes(mux)
 	mux.HandleFunc(hello_example_data_repos.ROUTE_PAGE, hello_example_data_repos.GetPage)
 }
 

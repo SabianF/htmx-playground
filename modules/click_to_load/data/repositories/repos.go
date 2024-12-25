@@ -105,3 +105,8 @@ func stringifyUsers(users []entities.User) [][]string {
 
 	return usersStringified
 }
+
+func AddRoutes(mux *http.ServeMux) {
+	mux.HandleFunc(ROUTE_PAGE, GetPage)
+	mux.HandleFunc(ROUTE_GET_USERS, GetUsers)
+}
