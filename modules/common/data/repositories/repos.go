@@ -21,7 +21,10 @@ func Log(format string, v ...any) {
 }
 
 func GetPage(w http.ResponseWriter, r *http.Request) {
-	homePage := common_use_cases.GetHomePage()
+
+	list_of_pages := GetAllPages()
+
+	homePage := common_use_cases.GetHomePage(list_of_pages)
 
 	homePage.Render(r.Context(), w)
 }

@@ -13,9 +13,9 @@ var PAGE_LIST = []entities.Page{
   entities.Page{"/delete-row", "Delete Row"},
 }
 
-templ MainMenuList() {
+templ MainMenuList(list_of_pages []entities.Page) {
   <ul>
-    for _, page := range PAGE_LIST {
+    for _, page := range list_of_pages {
       <li>@Link(page.Route, page.Title, nil)</li>
     }
   </ul>

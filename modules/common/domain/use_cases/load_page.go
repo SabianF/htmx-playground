@@ -2,9 +2,11 @@ package common
 
 import (
 	"github.com/a-h/templ"
-	common_pages "github.com/SabianF/htmx-playground/modules/common/presentation/pages"
+
+	entities "github.com/SabianF/htmx-playground/modules/common/domain/entities"
+	pages "github.com/SabianF/htmx-playground/modules/common/presentation/pages"
 )
 
-func GetHomePage() templ.Component {
-	return common_pages.HomePage()
+func GetHomePage(list_of_pages []entities.Page) templ.Component {
+	return pages.HomePage(list_of_pages)
 }
