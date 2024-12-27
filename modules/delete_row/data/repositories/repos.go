@@ -33,6 +33,11 @@ func GetPage(w http.ResponseWriter, r *http.Request) {
 	page.Render(r.Context(), w)
 }
 
+func DeleteRow(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+}
+
 func AddRoutes(mux *http.ServeMux) {
 	mux.HandleFunc(ROUTE_PAGE, GetPage)
+	mux.HandleFunc(ROUTE_DELETE, DeleteRow)
 }
