@@ -19,7 +19,7 @@ var clickToEditData = map[string]string{
 	"email"			: "joe@shmoe.com",
 }
 
-func GetPage(w http.ResponseWriter, r *http.Request) {
+func getPage(w http.ResponseWriter, r *http.Request) {
 
 	args := use_cases.LoadPageArgs{
 		Route_edit: ROUTE_EDIT,
@@ -31,7 +31,7 @@ func GetPage(w http.ResponseWriter, r *http.Request) {
 	use_cases.LoadPage(args).Render(r.Context(), w)
 }
 
-func GetEdit(w http.ResponseWriter, r *http.Request) {
+func getEdit(w http.ResponseWriter, r *http.Request) {
 	components.ClickToEditForm(
 		ROUTE_SAVE,
 		clickToEditData["firstName"],
@@ -40,7 +40,7 @@ func GetEdit(w http.ResponseWriter, r *http.Request) {
 	).Render(r.Context(), w)
 }
 
-func GetCancel(w http.ResponseWriter, r *http.Request) {
+func getCancel(w http.ResponseWriter, r *http.Request) {
 	pages.ClickToEditText(
 		ROUTE_EDIT,
 		clickToEditData["firstName"],
@@ -49,7 +49,7 @@ func GetCancel(w http.ResponseWriter, r *http.Request) {
 	).Render(r.Context(), w)
 }
 
-func GetSave(w http.ResponseWriter, r *http.Request) {
+func getSave(w http.ResponseWriter, r *http.Request) {
 	firstName := r.PostFormValue("firstName")
 	if firstName != "" && firstName != clickToEditData["firstName"] {
 		clickToEditData["firstName"] = firstName
@@ -74,8 +74,8 @@ func GetSave(w http.ResponseWriter, r *http.Request) {
 }
 
 func AddRoutes(mux *http.ServeMux) {
-	mux.HandleFunc(ROUTE_PAGE, GetPage)
-	mux.HandleFunc(ROUTE_EDIT, GetEdit)
-	mux.HandleFunc(ROUTE_SAVE, GetSave)
-	mux.HandleFunc(ROUTE_CANCEL, GetCancel)
+	mux.HandleFunc(ROUTE_PAGE, getPage)
+	mux.HandleFunc(ROUTE_EDIT, getEdit)
+	mux.HandleFunc(ROUTE_SAVE, getSave)
+	mux.HandleFunc(ROUTE_CANCEL, getCancel)
 }

@@ -22,7 +22,7 @@ var table_rows = [][]string{
 	{ "George", "gg@gmail.com", "Active" },
 }
 
-func GetPage(w http.ResponseWriter, r *http.Request) {
+func getPage(w http.ResponseWriter, r *http.Request) {
 
 	page := use_cases.LoadPage(
 		TABLE_HEADINGS,
@@ -33,11 +33,11 @@ func GetPage(w http.ResponseWriter, r *http.Request) {
 	page.Render(r.Context(), w)
 }
 
-func DeleteRow(w http.ResponseWriter, r *http.Request) {
+func deleteRow(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 }
 
 func AddRoutes(mux *http.ServeMux) {
-	mux.HandleFunc(ROUTE_PAGE, GetPage)
-	mux.HandleFunc(ROUTE_DELETE, DeleteRow)
+	mux.HandleFunc(ROUTE_PAGE, getPage)
+	mux.HandleFunc(ROUTE_DELETE, deleteRow)
 }

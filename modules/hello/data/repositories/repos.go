@@ -10,10 +10,10 @@ const ROUTE_PAGE string = "/hello"
 
 const DEFAULT_NAME string = "Steven"
 
-func GetPage(w http.ResponseWriter, r *http.Request) {
+func getPage(w http.ResponseWriter, r *http.Request) {
 	use_cases.LoadPage(DEFAULT_NAME).Render(r.Context(), w)
 }
 
 func AddRoutes(mux *http.ServeMux) {
-	mux.HandleFunc(ROUTE_PAGE, GetPage)
+	mux.HandleFunc(ROUTE_PAGE, getPage)
 }

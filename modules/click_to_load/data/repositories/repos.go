@@ -17,10 +17,10 @@ const ROUTE_PAGE string = "/click-to-load"
 const DEFAULT_PAGE int = 1
 const DEFAULT_PAGINATION int = 10
 
-func GetPage(w http.ResponseWriter, r *http.Request) {
+func getPage(w http.ResponseWriter, r *http.Request) {
 
 	next_page := strconv.Itoa(DEFAULT_PAGE + 1)
-	userProps := GetUserProps()
+	userProps := getUserProps()
 	users := fetchUserData(DEFAULT_PAGE, DEFAULT_PAGINATION)
 	usersStringified := stringifyUsers(users)
 
@@ -36,7 +36,7 @@ func GetPage(w http.ResponseWriter, r *http.Request) {
 
 const ROUTE_GET_USERS string = "/click-to-load/users"
 
-func GetUsers(w http.ResponseWriter, r *http.Request) {
+func getUsers(w http.ResponseWriter, r *http.Request) {
 	pageNumQuery := r.URL.Query().Get("page")
 
 	pageNum, err := strconv.Atoi(pageNumQuery)
@@ -57,7 +57,7 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 	use_cases.LoadMoreUsers(args).Render(r.Context(), w)
 }
 
-func GetUserProps() []string {
+func getUserProps() []string {
 
 	var userProps []string
 	userStruct := entities.User{}
@@ -107,6 +107,6 @@ func stringifyUsers(users []entities.User) [][]string {
 }
 
 func AddRoutes(mux *http.ServeMux) {
-	mux.HandleFunc(ROUTE_PAGE, GetPage)
-	mux.HandleFunc(ROUTE_GET_USERS, GetUsers)
+	mux.HandleFunc(ROUTE_PAGE, getPage)
+	mux.HandleFunc(ROUTE_GET_USERS, getUsers)
 }

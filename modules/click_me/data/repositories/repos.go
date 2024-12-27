@@ -11,20 +11,20 @@ const ROUTE_PAGE string = "/click-me"
 const ROUTE_CLICKED string = "/click-me/clicked"
 const ROUTE_RESET string = "/click-me/reset"
 
-func GetPage(w http.ResponseWriter, r *http.Request) {
+func getPage(w http.ResponseWriter, r *http.Request) {
 	click_me_pages.ClickMePage(ROUTE_CLICKED).Render(r.Context(), w)
 }
 
-func GetClicked(w http.ResponseWriter, r *http.Request) {
+func getClicked(w http.ResponseWriter, r *http.Request) {
 	click_me.ClickMeClicked(ROUTE_RESET).Render(r.Context(), w)
 }
 
-func GetReset(w http.ResponseWriter, r *http.Request) {
+func getReset(w http.ResponseWriter, r *http.Request) {
 	click_me.ClickMeButton(ROUTE_CLICKED).Render(r.Context(), w)
 }
 
 func AddRoutes(mux *http.ServeMux) {
-	mux.HandleFunc(ROUTE_PAGE, GetPage)
-	mux.HandleFunc(ROUTE_CLICKED, GetClicked)
-	mux.HandleFunc(ROUTE_RESET, GetReset)
+	mux.HandleFunc(ROUTE_PAGE, getPage)
+	mux.HandleFunc(ROUTE_CLICKED, getClicked)
+	mux.HandleFunc(ROUTE_RESET, getReset)
 }
