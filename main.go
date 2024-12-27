@@ -35,8 +35,6 @@ import (
 	hello_example_data_repos "github.com/SabianF/htmx-playground/modules/hello/data/repositories"
 )
 
-const ROUTE_ROOT string = "/"
-
 func main() {
 	handleGracefulExit()
 
@@ -66,7 +64,7 @@ func handleGracefulExit() {
 }
 
 func exposeEndpoints(mux *http.ServeMux) {
-	mux.HandleFunc(ROUTE_ROOT, data_repos.GetPage)
+	data_repos.AddRoutes(mux)
 	bulk_update_data_repos.AddRoutes(mux)
 	click_me_data_repos.AddRoutes(mux)
 	click_to_edit_data_repos.AddRoutes(mux)
