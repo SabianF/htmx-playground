@@ -8,6 +8,7 @@ import (
 	entities "github.com/SabianF/htmx-playground/modules/common/domain/entities"
 	delete_row "github.com/SabianF/htmx-playground/modules/delete_row/data/repositories"
 	hello "github.com/SabianF/htmx-playground/modules/hello/data/repositories"
+	web_socket "github.com/SabianF/htmx-playground/modules/web_socket/data/repositories"
 )
 
 func GetAllPages() []entities.Page {
@@ -18,5 +19,6 @@ func GetAllPages() []entities.Page {
 		{Route: bulk_update.ROUTE_PAGE		, Title: "Bulk Update"	},
 		{Route: click_to_load.ROUTE_PAGE	, Title: "Click to Load"},
 		{Route: delete_row.ROUTE_PAGE			, Title: "Delete Row"		},
+		{Route: web_socket.ROUTE_PAGE			, Title: "Web Socket"		},
 	}
 }

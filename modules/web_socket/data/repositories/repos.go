@@ -1,10 +1,10 @@
 package web_socket
 
 import (
+	"log"
 	"net/http"
 	"time"
 
-	common_data_repos "github.com/SabianF/htmx-playground/modules/common/data/repositories"
 	pages "github.com/SabianF/htmx-playground/modules/web_socket/presentation/pages"
 
 	gorilla_websocket "github.com/gorilla/websocket"
@@ -24,12 +24,12 @@ func serveWebSocket(w http.ResponseWriter, r *http.Request) {
 	// Initialize web socket
 	ws, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
-		common_data_repos.Log("serveWebSocket upgrader.Upgrade error: %v\n", err)
+		log.Printf("serveWebSocket upgrader.Upgrade error: %v\n", err)
 		return
 	}
 	defer ws.Close()
 
-	common_data_repos.Log("Web socket client connected: %v", ws.RemoteAddr())
+	log.Printf("Web socket client connected: %v", ws.RemoteAddr())
 
 	// Listen and handle events
 	sendFrequentMessages(ws)
@@ -51,16 +51,16 @@ func getAndRespondToMessages(ws *gorilla_websocket.Conn) {
 		// Receive message from client
 		msgType, msg, err := ws.ReadMessage()
 		if err != nil {
-			common_data_repos.Log("ws.ReadMessage error: %v\n", err)
+			log.Printf("ws.ReadMessage error: %v\n", err)
 			break
 		}
-		common_data_repos.Log("Web socket message: %v", msg)
+		log.Printf("Web socket message: %v", msg)
 
 		// Send received message back to client
 		time.Sleep(2 * time.Second)
 		err = ws.WriteMessage(msgType, msg)
 		if err != nil {
-			common_data_repos.Log("ws.WriteMessage error: %v\n", err)
+			log.Printf("ws.WriteMessage error: %v\n", err)
 			break
 		}
 	}
