@@ -1,0 +1,17 @@
+
+package common
+
+type LoadingSpinnerAttributes struct {
+  Id string
+}
+
+templ LoadingSpinner(attributes LoadingSpinnerAttributes) {
+  <img
+    if len(attributes.Id) > 0 {
+      id={ attributes.Id }
+    }
+    src="/modules/common/data/sources/assets/loading_spinner.svg"
+    width="16"
+    height="16"
+  />
+}
