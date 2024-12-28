@@ -25,6 +25,7 @@ go.work.sum
 .templates/
 .pico*
 .templ-watch.sh
+.hot-reload.sh
 
 # Templ generated files
 **/*_templ.go
