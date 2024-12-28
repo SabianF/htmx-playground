@@ -1,0 +1,31 @@
+
+package web_socket
+import "github.com/SabianF/htmx-playground/modules/common/presentation/components"
+
+import components "github.com/SabianF/htmx-playground/modules/web_socket/presentation/components"
+
+templ WebSocketPage() {
+
+  {{
+    title := "Web Socket"
+    description := "An example of using web sockets for real-time updates of multiple elements: messages, chats, notifications, and more"
+  }}
+
+  @common.Page(title, description) {
+    <h1>{ title }</h1>
+    <article>
+      <h2>Status</h2>
+      @components.ConnectionIndicatorClosed()
+    </article>
+    <div class="grid">
+      <article>
+        <h2>Notifications</h2>
+        <notifications id="notifications"></notifications>
+      </article>
+      <article>
+        <h2>Chat</h2>
+        <chat id="chat"></chat>
+      </article>
+    </div>
+  }
+}

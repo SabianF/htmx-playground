@@ -5,8 +5,26 @@ import common_components "github.com/SabianF/htmx-playground/modules/common/pres
 
 const Id string = "connection-indicator"
 
-templ ConnectionIndicator() {
-  <div id={ Id }>
+templ ConnectionIndicatorClosed() {
+  @wrapper() {
+    @common_components.Link("#", "[-_-]", nil)
+  }
+}
+
+templ ConnectionIndicatorConnecting() {
+  @wrapper() {
     @common_components.LoadingSpinner(common_components.LoadingSpinnerAttributes{})
+  }
+}
+
+templ ConnectionIndicatorOpen() {
+  @wrapper() {
+    @common_components.Link("#", "[^_^]", nil)
+  }
+}
+
+templ wrapper() {
+  <div id={ Id }>
+    { children... }
   </div>
 }
