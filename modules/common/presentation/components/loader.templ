@@ -1,0 +1,32 @@
+
+package common
+
+import entities "github.com/SabianF/htmx-playground/modules/common/domain/entities"
+
+templ Loader(
+  url string,
+  attributes entities.LoaderAttributes,
+) {
+  <loader
+    if attributes.HasDelay() {
+      hx-trigger={ "load delay:" + attributes.Delay }
+    } else {
+      hx-trigger="load"
+    }
+    hx-get={ url }
+    hx-swap="outerHTML"
+    if attributes.HasCSS() {
+      style={ attributes.GetCSS() }
+    }
+  >
+    <img
+      src="/modules/common/data/sources/assets/loading_spinner.svg"
+      width="16"
+      height="16"
+      aria-busy="true"
+      if attributes.HasAriaLabel() {
+        aria-label={ attributes.AriaLabel }
+      }
+    />
+  </loader>
+}

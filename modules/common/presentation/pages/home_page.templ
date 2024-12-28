@@ -2,8 +2,8 @@
 package common
 
 import (
-	entities "github.com/SabianF/htmx-playground/modules/common/domain/entities"
-	components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
+  entities "github.com/SabianF/htmx-playground/modules/common/domain/entities"
+  components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
 )
 
 templ HomePage(list_of_pages []entities.Page) {
@@ -11,7 +11,6 @@ templ HomePage(list_of_pages []entities.Page) {
     title := "HTMX Playground"
     description := "A place where I play around with HTMX, Go (Golang), Templ, PicoCSS, and others."
   }}
-
   @components.Page(title, description) {
     <h1 id="title">{ title }</h1>
     @components.MainMenuList(list_of_pages)
