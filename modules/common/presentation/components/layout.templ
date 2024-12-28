@@ -38,6 +38,7 @@ templ head(title string, description string) {
 templ scripts() {
   <script src="/modules/common/data/sources/assets/htmx-2.0.3.min.js"></script>
   <script src="/modules/common/data/sources/assets/htmx-head-support-2.0.1.min.js"></script>
+  <script src="/modules/common/data/sources/assets/htmx-ws.js"></script>
 }
 
 templ styles() {
@@ -47,7 +48,7 @@ templ styles() {
 }
 
 templ body() {
-  <body id="body" hx-boost="true">
+  <body id="body" hx-boost="true" hx-ext="ws" ws-connect="/ws">
     @header()
     <main id="content" class="container">
       { children... }

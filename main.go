@@ -33,6 +33,7 @@ import (
 	click_to_edit_data_repos "github.com/SabianF/htmx-playground/modules/click_to_edit/data/repositories"
 	click_to_load_data_repos "github.com/SabianF/htmx-playground/modules/click_to_load/data/repositories"
 	hello_example_data_repos "github.com/SabianF/htmx-playground/modules/hello/data/repositories"
+	web_socket_data_repos "github.com/SabianF/htmx-playground/modules/web_socket/data/repositories"
 )
 
 func main() {
@@ -71,6 +72,7 @@ func exposeEndpoints(mux *http.ServeMux) {
 	click_to_load_data_repos.AddRoutes(mux)
 	delete_row_data_repos.AddRoutes(mux)
 	hello_example_data_repos.AddRoutes(mux)
+	web_socket_data_repos.AddRoutes(mux)
 }
 
 func exposeResources(mux *http.ServeMux) {

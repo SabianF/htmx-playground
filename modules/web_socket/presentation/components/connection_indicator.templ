@@ -1,0 +1,12 @@
+
+package web_socket
+
+import common_components "github.com/SabianF/htmx-playground/modules/common/presentation/components"
+
+const Id string = "connection-indicator"
+
+templ ConnectionIndicator() {
+  <div id={ Id }>
+    @common_components.LoadingSpinner(common_components.LoadingSpinnerAttributes{})
+  </div>
+}
