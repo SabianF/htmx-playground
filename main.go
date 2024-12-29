@@ -1,19 +1,10 @@
-// https://www.digitalocean.com/community/tutorials/how-to-make-an-http-server-in-go
+// TODO: Implement basic DB for table data
 
-// - HTMX + Go + Templ: https://templ.guide/server-side-rendering/htmx/#installation
-// - HTMX + Go
-// 	- Part 1 (Templating): https://medium.com/gravel-engineering/this-blogpost-also-posted-in-my-personal-blog-which-you-can-access-here-dd856c61001
-// 	- Part 2 (TailwindCSS): https://medium.com/gravel-engineering/personal-blog-with-htmx-go-part-2-integrating-tailwindcss-412ebc4dcc97
-// 	- Part 3 (Server-rendered markdown):https://medium.com/@mwyndham/personal-blog-with-htmx-go-part-3-server-rendered-markdown-75c80cc5f470
-// - HTML custom tags: https://matthewjamestaylor.com/custom-tags
-// - TailwindCSS UI Kit: https://www.hyperui.dev/
+// Backend solution: https://appwrite.io/
 
-// Go - Serving static files: https://stackoverflow.com/a/43425767
+// HTML custom tags: https://matthewjamestaylor.com/custom-tags
 
-// TODO: GoTTH stack: https://www.youtube.com/watch?v=k00jVJeZxrs
-// TODO: Impl middleware: https://drstearns.github.io/tutorials/gomiddleware/
-// TODO: Easy backend solution: https://appwrite.io/
-// TODO: Simple motion animations https://auto-animate.formkit.com/#usage
+// Simple motion animations https://auto-animate.formkit.com/#usage
 
 package main
 
