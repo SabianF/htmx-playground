@@ -13,19 +13,21 @@ templ WebSocketPage() {
 
   @common.Page(title, description) {
     <h1>{ title }</h1>
-    <article>
-      <h2>Status</h2>
-      @components.ConnectionIndicatorClosed()
-    </article>
-    <div class="grid">
+    <div hx-ext="ws" ws-connect="/ws">
       <article>
-        <h2>Notifications</h2>
-        <notifications id="notifications"></notifications>
+        <h2>Status</h2>
+        @components.ConnectionIndicatorClosed()
       </article>
-      <article>
-        <h2>Chat</h2>
-        <chat id="chat"></chat>
-      </article>
+      <div class="grid">
+        <article>
+          <h2>Notifications</h2>
+          <notifications id="notifications"></notifications>
+        </article>
+        <article>
+          <h2>Chat</h2>
+          <chat id="chat"></chat>
+        </article>
+      </div>
     </div>
   }
 }
