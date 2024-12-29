@@ -1,10 +1,13 @@
 package web_socket
 
 import (
+	"bytes"
+	"context"
 	"log"
 	"net/http"
 	"time"
 
+	web_socket "github.com/SabianF/htmx-playground/modules/web_socket/presentation/components"
 	pages "github.com/SabianF/htmx-playground/modules/web_socket/presentation/pages"
 
 	gorilla_websocket "github.com/gorilla/websocket"
@@ -39,9 +42,13 @@ func serveWebSocket(w http.ResponseWriter, r *http.Request) {
 func sendFrequentMessages(ws *gorilla_websocket.Conn) {
 	for {
 		time.Sleep(3 * time.Second)
+
+		var msgBuffer bytes.Buffer
+		web_socket.ChatMessage("Hello, there.").Render(context.TODO(), &msgBuffer)
+
 		ws.WriteMessage(
 			gorilla_websocket.TextMessage,
-			[]byte("<div hx-swap-oob='beforeend:#chat'><article>Hello, there.</article></div>"),
+			msgBuffer.Bytes(),
 		)
 	}
 }
