@@ -44,7 +44,7 @@ func sendFrequentMessages(ws *gorilla_websocket.Conn) {
 		time.Sleep(3 * time.Second)
 
 		var msgBuffer bytes.Buffer
-		web_socket.ChatMessage("Hello, there.").Render(context.TODO(), &msgBuffer)
+		web_socket.Notification("Hello, there.").Render(context.TODO(), &msgBuffer)
 
 		ws.WriteMessage(
 			gorilla_websocket.TextMessage,

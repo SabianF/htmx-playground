@@ -1,0 +1,10 @@
+
+package web_socket
+
+templ Notification(text string) {
+  <div hx-swap-oob="beforeend:#notifications">
+    <notification>
+      { text }
+    </notification>
+  </div>
+}
