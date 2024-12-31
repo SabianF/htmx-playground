@@ -21,11 +21,20 @@
 go.work
 go.work.sum
 
+# Go generated files
+tmp/
+
+# Dev tools
+.air.toml
+
 # custom
 .templates/
 .pico*
 .templ-watch.sh
 .hot-reload.sh
+
+# VS Code files
+.vscode/
 
 # Templ generated files
 **/*_templ.go
