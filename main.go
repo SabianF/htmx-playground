@@ -25,10 +25,13 @@ import (
 	click_to_load_data_repos "github.com/SabianF/htmx-playground/modules/click_to_load/data/repositories"
 	hello_example_data_repos "github.com/SabianF/htmx-playground/modules/hello/data/repositories"
 	web_socket_data_repos "github.com/SabianF/htmx-playground/modules/web_socket/data/repositories"
+
+	"github.com/joho/godotenv"
 )
 
 func main() {
 	handleGracefulExit()
+	initEnv()
 
 	mux := http.NewServeMux()
 
@@ -55,6 +58,16 @@ func handleGracefulExit() {
 	}()
 }
 
+func initEnv() {
+	err := godotenv.Load(".env")
+	if err != nil {
+		data_repos.Log("Error loading .env: %v\n", err)
+		return
+	}
+
+	data_repos.Log("Loaded environment variables.")
+}
+
 func exposeEndpoints(mux *http.ServeMux) {
 	data_repos.AddRoutes(mux)
 	bulk_update_data_repos.AddRoutes(mux)
@@ -71,7 +84,7 @@ func exposeResources(mux *http.ServeMux) {
 }
 
 func startServer(mux http.Handler) {
-	const port = ":3333"
+	port := ":" + os.Getenv("APP_PORT")
 	data_repos.Log("Starting server on port %s ...\n", port)
 	err := http.ListenAndServe(port, mux)
 
